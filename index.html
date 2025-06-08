@@ -1,0 +1,2051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type='text/javascript' src='//racesmoulderstamp.com/80/93/ba/8093baf87056ee75c4d23544972b53ee.js'></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operating Systems Module Notes - Randun Gayantha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #28a745; /* Green */
+            color: white;
+            padding: 10px 0; /* Smaller padding */
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 1.8em; /* Smaller font size */
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-weight: 300;
+        }
+
+        /* Navigation Bar Styling */
+        nav {
+            background-color: #343a40; /* Dark gray */
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed; /* Fixed position */
+            top: 60px; /* Aligns it 60px from the top, below the header */
+            width: 100%; /* Spans the full width */
+            z-index: 1000; /* Lower z-index than header */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Allows nav items to wrap on smaller screens */
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #495057; /* Lighter dark gray */
+            color: #ffc107; /* Yellow */
+        }
+
+        /* Main Content Container */
+        .container {
+            max-width: 1200px;
+            /* Adjust margin-top to account for fixed header and nav height */
+            margin: 100px auto 20px auto; /* Example: 100px to push content down */
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-left: 5px solid #007bff; /* Blue */
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        section h2 {
+            color: #007bff; /* Blue */
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        section h3 {
+            color: #6f42c1; /* Purple */
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        section h4 {
+            color: #dc3545; /* Red */
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Paragraph and List Styling */
+        p {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style: disc inside;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        ol {
+            list-style: decimal inside;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e2e6ea;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        /* Code and Preformatted Text */
+        pre {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #e9ecef;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        /* Exam Questions Styling */
+        .exam-question {
+            background-color: #fff3cd; /* Light yellow */
+            border-left: 5px solid #ffc107; /* Yellow */
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .exam-question strong {
+            color: #dc3545; /* Red */
+        }
+
+        .exam-answer {
+            background-color: #d4edda; /* Light green */
+            border-left: 5px solid #28a745; /* Green */
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none; /* Hidden by default */
+        }
+
+        .exam-answer.show {
+            display: block;
+        }
+
+        .toggle-answer-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .toggle-answer-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Citation Styling */
+        .citation {
+            font-size: 0.8em;
+            color: #6c757d;
+            vertical-align: super;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #343a40;
+            color: white;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            section {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Operating Systems Module Notes</h1>
+        <p>By Randun Gayantha</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#introduction-to-operating-systems">Introduction to OS</a></li>
+            <li><a href="#processes-and-threads">Processes & Threads</a></li>
+            <li><a href="#process-scheduling">Process Scheduling</a></li>
+            <li><a href="#memory-management">Memory Management</a></li>
+            <li><a href="#virtual-memory">Virtual Memory</a></li>
+            <li><a href="#file-management">File Management</a></li>
+            <li><a href="#security-in-operating-systems">OS Security</a></li>
+            <li><a href="short.html">Short Note</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <section id="introduction-to-operating-systems">
+            <h2>Introduction to Operating Systems</h2>
+
+            <h3 id="what-is-an-operating-system">What is an Operating System?</h3>
+            <p>An Operating System (OS) is a program that manages all other programs (applications) and controls their execution. It acts as an intermediary between the user(s) and the computer hardware.  The main objectives of an OS are convenience, efficiency, and extensibility. </p>
+            <p>An OS is a software layer that abstracts hardware and manages resources.  It acts as a bridge between hardware and user programs, simplifying resource management and hardware control for users and developers. </p>
+            <p><strong>Functions of an OS:</strong></p>
+            <ul>
+                <li><strong>Extended Machine:</strong> Provides a clean, easy-to-use interface by abstracting the complexity of hardware (e.g., turning disk blocks into files).  It simplifies hardware interaction. </li>
+                <li><strong>Resource Manager:</strong> Manages resources like the CPU, memory, and I/O devices, ensuring orderly and fair allocation to multiple users or programs. </li>
+            </ul>
+
+            <h3 id="evolution-of-operating-systems">Evolution of Operating Systems</h3>
+            <p>Operating systems have evolved through several generations:</p>
+            <ul>
+                <li><strong>First Generation (1945-1955):</strong> Computers used vacuum tubes; programming was done manually or with plugboards. No operating systems existed. </li>
+                <li><strong>Second Generation (1955-1965):</strong> Introduction of transistors and batch systems. Programs were written on punch cards and executed in batches.  An early batch system involved programmers bringing cards to a 1401 machine, which read batches of jobs onto tape. An operator would then carry the input tape to a 7094 machine for computing, and finally, the output tape would be carried back to the 1401 for printing. </li>
+                <li><strong>Third Generation (1965-1980):</strong> Integrated Circuits (ICs) enabled multiprogramming, allowing multiple programs to run simultaneously. </li>
+                <li><strong>Fourth Generation (1980-Present):</strong> Personal computers emerged, with operating systems like MS-DOS, Windows, and macOS. </li>
+                <li><strong>Fifth Generation (1990-Present):</strong> Mobile computing took center stage, with smartphones and tablets running OS like iOS and Android. </li>
+            </ul>
+
+            <h3 id="components-of-a-modern-os">Components of a Modern OS</h3>
+            <p>Key hardware components of a modern OS include:</p>
+            <ul>
+                <li><strong>Processors:</strong> Execute instructions. </li>
+                <li><strong>Memory:</strong> Stores data and instructions temporarily (RAM) or permanently (non-volatile storage like SSDs). </li>
+                <li><strong>I/O Devices:</strong> Facilitate interaction with the system (e.g., keyboard, mouse, monitor). </li>
+                <li><strong>Buses:</strong> Connect all components.</li>
+            </ul>
+            <p>Other important aspects:</p>
+            <ul>
+                <li><strong>Boot Process:</strong> Loads the operating system from storage to memory during startup. </li>
+                <li><strong>Modes:</strong> Kernel mode and user mode.</li>
+                <li><strong>User Interfaces:</strong> Command-line (shell) and GUI. </li>
+            </ul>
+
+            <h3 id="booting-a-computer">Booting a Computer</h3>
+            <p>When you press the power button: </p>
+            <ol>
+                <li>The computer wakes up and waits for the power to stabilize. </li>
+                <li>The CPU starts running a small program stored on the computer's motherboard, which is called the BIOS or UEFI (depending on the computer's age). </li>
+            </ol>
+            <p>What BIOS/UEFI does:</p>
+            <ul>
+                <li><strong>BIOS (Older Computers):</strong> Checks the computer's basic parts (like memory and keyboard) and looks for something called the Master Boot Record (MBR) on the storage device. </li>
+                <li><strong>UEFI (Modern Computers):</strong> Does the same checks but is much faster and smarter. It looks for a special table called the GUID Partition Table (GPT) to find the operating system. </li>
+            </ul>
+            <p>Next step: Find the Operating System: </p>
+            <ol>
+                <li>The BIOS or UEFI loads a small program called the bootloader from storage. </li>
+                <li>The bootloader's job is to load the operating system (like Windows, Linux, or macOS) into the computer's memory. </li>
+            </ol>
+            <p>Operating System takes over:</p>
+            <ol>
+                <li>The operating system starts, checks what devices (like printers or monitors) are connected, and loads the necessary drivers to communicate with them. </li>
+                <li>Finally, it gets everything ready so you can see the login screen or desktop. </li>
+            </ol>
+            <p>What makes UEFI special? </p>
+            <ul>
+                <li>It's faster, works with newer and larger storage devices, and can read file systems (like folders on a hard drive) directly. </li>
+                <li>It even has its own menu to let you choose which operating system to load if there's more than one. </li>
+                <li><strong>Fun Fact:</strong> UEFI can use a feature called Secure Boot to ensure that the operating system starts with the correct and safe software. </li>
+            </ul>
+
+            <h3 id="the-operating-system-zoo">The Operating System Zoo</h3>
+            <p>Different types of operating systems include: </p>
+            <ul>
+                <li><strong>Mainframe OS:</strong> Handles large-scale batch and transaction processing. </li>
+                <li><strong>Server OS:</strong> Designed for multi-user environments. </li>
+                <li><strong>PC OS:</strong> For personal use (e.g., Windows, macOS). </li>
+                <li><strong>Smartphone OS:</strong> Optimized for touch interfaces and mobility (e.g., Android, iOS). </li>
+                <li><strong>IoT and Embedded OS:</strong> Found in devices like smartwatches and home appliances. </li>
+                <li><strong>Real-Time OS:</strong> Prioritizes task deadlines, used in control systems. </li>
+                <li><strong>Smart Card OS:</strong> Runs on credit-card-sized devices for secure transactions.</li>
+            </ul>
+
+            <h3 id="key-concepts-in-operating-systems">Key Concepts in Operating Systems</h3>
+            <ul>
+                <li><strong>Processes:</strong> Programs in execution. </li>
+                <li><strong>Address Spaces:</strong> Memory allocated for processes. </li>
+                <li><strong>Files:</strong> Data stored on disk, abstracted by the OS. </li>
+                <li><strong>I/O:</strong> Input/Output management. </li>
+                <li><strong>Protection:</strong> Secures resources from unauthorized access. </li>
+                <li><strong>Shell:</strong> Interface for user commands (text-based or GUI). </li>
+            </ul>
+
+            <h3 id="system-calls">System Calls</h3>
+            <p>System Calls provide an interface for programs to request services from the OS. </p>
+            <p><strong>Examples:</strong></p>
+            <ul>
+                <li><strong>Process Management:</strong> Create, terminate processes. </li>
+                <li><strong>File Management:</strong> Open, read, write files. </li>
+                <li><strong>I/O Management:</strong> Input/output operations. </li>
+                <li><strong>Directory Management:</strong> Create, delete directories. </li>
+            </ul>
+
+            <h3 id="operating-system-structures">Operating System Structures</h3>
+            <p>Common OS Structures: </p>
+            <ol>
+                <li><strong>Monolithic Systems:</strong> Entire OS is one large program (e.g., UNIX). </li>
+                <li><strong>Layered Systems:</strong> Divides OS into layers with specific responsibilities. </li>
+                <li><strong>Microkernels:</strong> Minimal core with essential functions; other services run in user space. </li>
+                <li><strong>Client-Server Model:</strong> OS components communicate as independent clients and servers. </li>
+                <li><strong>Virtual Machines:</strong> Simulate hardware for multiple OS instances. </li>
+                <li><strong>Exokernels/Unikernels:</strong> Lightweight, application-specific OS designs. </li>
+            </ol>
+
+            <h3 id="research-and-modern-trends">Research and Modern Trends</h3>
+            <p>Key trends in operating systems research include: </p>
+            <ul>
+                <li>Improving efficiency in virtualization and security. </li>
+                <li>Exploring real-time OS for IoT devices. </li>
+                <li>Enhancing resource management in cloud systems. </li>
+            </ul>
+
+            <h4>Exam Ready Questions: Introduction to Operating Systems</h4>
+            <div class="exam-question">
+                <p><strong>Question 1:</strong> Explain the dual role of an Operating System as both an "Extended Machine" and a "Resource Manager."</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    The Operating System (OS) functions as an "Extended Machine" by providing a simpler, more user-friendly interface to complex hardware, abstracting away its complexities. For example, it turns raw disk blocks into easily manageable files.  As a "Resource Manager," the OS efficiently and fairly allocates and manages computer resources such as the CPU, memory, and I/O devices among multiple users or programs. </p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 2:</strong> Describe the key differences in how older computers (BIOS) and modern computers (UEFI) locate and load the operating system during the boot process. What is a specific advantage of UEFI?</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    Older computers using BIOS check basic hardware parts and look for the Master Boot Record (MBR) on the storage device to find the operating system.  Modern computers using UEFI perform similar checks but are faster and smarter; they look for a GUID Partition Table (GPT) to find the OS.  A specific advantage of UEFI is that it can use Secure Boot to ensure the operating system starts with correct and safe software, enhancing security. </p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 3:</strong> Compare Monolithic Systems and Microkernels in terms of their structure and how services are handled.</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    In Monolithic Systems, the entire operating system is a single, large program (e.g., UNIX).  This means all services, including device drivers, file systems, and memory management, are tightly integrated within the kernel. In contrast, Microkernels have a minimal core with only essential functions, and other services run in user space.  This modularity generally leads to increased reliability and security as failures in one service are less likely to crash the entire system.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="processes-and-threads">
+            <h2>Processes and Threads</h2>
+
+            <h3 id="processes">Processes</h3>
+            <p>A process is an active, running instance of a program. A program is a passive entity, while a process is an active one.  Processes provide pseudo-concurrent operations on CPUs.  Each process is identified by a unique Process ID (PID). </p>
+
+            <h3 id="a-process-and-a-program">A Process and a Program</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Program</th>
+                        <th>Process</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nature</td>
+                        <td>Set of instructions</td>
+                        <td>Program in execution</td>
+                    </tr>
+                    <tr>
+                        <td>Entity Type</td>
+                        <td>Passive/static entity</td>
+                        <td>Active/dynamic entity</td>
+                    </tr>
+                    <tr>
+                        <td>Life Span</td>
+                        <td>Longer lifespan; stored on disk forever</td>
+                        <td>Limited lifespan; created and terminated with execution</td>
+                    </tr>
+                    <tr>
+                        <td>Memory</td>
+                        <td>Requires disk space for instructions</td>
+                        <td>Contains various resources like memory address, disk, printer etc.</td>
+                    </tr>
+                    <tr>
+                        <td>Address Space</td>
+                        <td>Requires disk space for instructions</td>
+                        <td>Contains memory address called address space</td>
+                    </tr>
+                </tbody>
+            </table>
+            <span class="citation"></span>
+
+            <h3 id="the-process-model">The Process Model</h3>
+            <ul>
+                <li>A process contains the program's code, data, and current execution state. </li>
+                <li>Processes are independent and managed by the OS. </li>
+                <li>This model allows multitasking with isolated address spaces.</li>
+            </ul>
+
+            <h3 id="process-in-memory">Process in Memory</h3>
+            <p>The memory of a process is organized into different sections:</p>
+            <ul>
+                <li><strong>Stack:</strong> Used to store function calls and local variables.  It operates in a Last-In-First-Out (LIFO) manner, with each function call creating a new stack frame.  Local variables and function parameters are stored on the stack. </li>
+                <li><strong>Heap:</strong> The dynamic memory area, where memory is allocated at runtime using functions like `malloc()`. </li>
+                <li><strong>Data Segment:</strong> Stores global and static variables. It is further divided into initialized data and uninitialized (or zero-initialized) data sections. </li>
+                <li><strong>Text Segment:</strong> Contains the executable code of the program. </li>
+            </ul>
+
+            <h3 id="memory-layout-of-a-c-program">Memory Layout of a C Program</h3>
+            <p>This section typically includes a diagram showing the memory layout of a C program, illustrating the stack, heap, data (initialized and uninitialized), and text segments. An example of C code showing `main` function, `malloc`, and variables would relate to this layout. </p>
+
+            <h3 id="process-creation">Process Creation</h3>
+            <p>Processes are created using system calls (e.g., <code>fork()</code>). A parent process spawns child processes. Attributes like environment variables are inherited by child processes. </p>
+
+            <h3 id="process-termination">Process Termination</h3>
+            <p>Processes can end due to: </p>
+            <ul>
+                <li>Normal completion. </li>
+                <li>Errors or exceptions. </li>
+                <li>Parent explicitly killing the process. </li>
+            </ul>
+
+            <h3 id="process-states">Process States</h3>
+            <p>As a process executes, it changes state: </p>
+            <ul>
+                <li><strong>New:</strong> The process is being created. </li>
+                <li><strong>Ready:</strong> The process is waiting to be assigned to a processor. </li>
+                <li><strong>Running:</strong> Instructions are being executed. </li>
+                <li><strong>Waiting:</strong> The process is waiting for some event to occur. </li>
+                <li><strong>Terminated:</strong> The process has finished execution. </li>
+            </ul>
+            <p>Transitions occur based on scheduling and events.  The scheduler ensures fairness and efficiency. </p>
+
+            <h3 id="simplified-state-transitions">Simplified State Transitions</h3>
+            <p>A process can be in running, blocked, or ready states. Transitions between these states are shown in a diagram. For example, a process blocks for input (Running to Blocked), the scheduler picks another process (Blocked to Ready or Running to Ready), and input becomes available (Blocked to Ready). </p>
+
+            <h3 id="implementation-of-processes">Implementation of Processes</h3>
+            <p>To implement the process model, the operating system maintains a table/array, called the process table, with one entry per process. </p>
+            <p>Each process in an operating system is represented by a <strong>Process Control Block (PCB)</strong>. </p>
+            <p>The PCB contains state information  and: </p>
+            <ul>
+                <li>Contains information associated with a specific process. </li>
+                <li>Is used by the OS for context switching. </li>
+                <li>Serves as a repository of any information that may vary from process to process. </li>
+                <li>Tracks memory, registers, and open files. </li>
+            </ul>
+
+            <h3 id="pcb">PCB</h3>
+            <p>The PCB typically includes: </p>
+            <ul>
+                <li>Process state - running, waiting, etc. </li>
+                <li>Program counter – location of instruction to next execute. </li>
+                <li>CPU registers - contents of all process-centric registers. </li>
+                <li>CPU scheduling information - priorities, scheduling queue pointers. </li>
+                <li>Memory-management information - memory allocated to the process. </li>
+                <li>Accounting information - CPU used, clock time elapsed since start, time limits. </li>
+                <li>I/O status information - I/O devices allocated to process, list of open files. </li>
+            </ul>
+
+            <h3 id="modeling-multiprogramming">Modeling Multiprogramming</h3>
+            <p>Multiprogramming ensures efficient CPU use.  Rapid process switching gives the illusion of concurrency.  This maximizes CPU utilization. </p>
+
+            <h3 id="thread">Thread</h3>
+            <p>A thread is the smallest execution unit.  Threads allow multiple tasks within a single process.  Threads share memory and global variables.  Each thread has its own stack and registers.  They are faster and more lightweight compared to processes.  Threads are ideal for parallel tasks like web servers. </p>
+
+            <h3 id="threads-in-user-space-and-kernel-space">Threads in User Space and Kernel Space</h3>
+            <ul>
+                <li><strong>User Space Threads:</strong>
+                    <ul>
+                        <li>Managed by user libraries. </li>
+                        <li><strong>Advantages:</strong> Fast, portable. </li>
+                        <li><strong>Limitation:</strong> Blocking affects the entire process. </li>
+                    </ul>
+                </li>
+                <li><strong>Kernel Space Threads:</strong>
+                    <ul>
+                        <li>Managed by the OS kernel. </li>
+                        <li><strong>Advantages:</strong> Independent scheduling, avoids blocking issues. </li>
+                        <li><strong>Limitation:</strong> Higher overhead due to kernel involvement. </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3 id="hybrid-implementations">Hybrid Implementations</h3>
+            <p>Hybrid implementations combine user-level and kernel-level threads.  They are flexible and efficient.  For example, thread libraries for user space, with kernel managing blocking. </p>
+
+            <h3 id="making-code-multithreaded">Making Code Multithreaded</h3>
+            <p>To make code multithreaded: </p>
+            <ul>
+                <li>Identify tasks for parallelism. </li>
+                <li>Manage synchronization to avoid race conditions. </li>
+                <li>Handle deadlocks and shared resource conflicts. </li>
+            </ul>
+
+            <h3 id="race-conditions">Race Conditions</h3>
+            <p>Race conditions occur when threads/processes access shared data concurrently.  This can lead to unpredictable results.  Synchronization mechanisms are required to prevent them. </p>
+
+            <h3 id="critical-regions">Critical Regions</h3>
+            <p>A critical region is a code section where shared resources are accessed.  Mutual exclusion ensures safe execution, meaning only one thread/process can access it at a time.  Locks or semaphores are used for this. </p>
+
+            <h4>Exam Ready Questions: Processes and Threads</h4>
+            <div class="exam-question">
+                <p><strong>Question 1:</strong> Differentiate between a "program" and a "process" in the context of operating systems, highlighting their key characteristics and life spans.</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    A "program" is a passive entity, a set of instructions stored on disk, with a longer, often permanent, lifespan.  It requires disk space. A "process," on the other hand, is an active entity, a program in execution, with a limited lifespan, created when execution starts and terminated when it finishes.  A process contains various resources like its memory address space, disk, and printer. </p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 2:</strong> Describe the main sections of a process's memory layout and what type of data each section typically stores. </p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    The main sections of a process's memory are:
+                    <ul>
+                        <li><strong>Stack:</strong> Stores function calls and local variables, operating in a Last-In-First-Out (LIFO) manner. </li>
+                        <li><strong>Heap:</strong> The dynamic memory area where memory is allocated during runtime using functions like `malloc()`. </li>
+                        <li><strong>Data Segment:</strong> Stores global and static variables, often divided into initialized and uninitialized (or zero-initialized) data sections. </li>
+                        <li><strong>Text Segment:</strong> Contains the executable code of the program. </li>
+                    </ul></p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 3:</strong> Explain the concept of a Process Control Block (PCB) and list at least three types of information it stores. </p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    A Process Control Block (PCB) is a data structure used by the operating system to store all the state information related to a specific process.  It acts as a repository for information that may vary from process to process and is crucial for context switching. 
+                    Three types of information it stores are:
+                    <ol>
+                        <li>Process state (e.g., running, waiting, new, ready, terminated). </li>
+                        <li>Program counter (the address of the next instruction to be executed). </li>
+                        <li>CPU scheduling information (e.g., process priorities, pointers to scheduling queues). </li>
+                        <li>Memory-management information (e.g., memory allocated to the process). </li>
+                        <li>I/O status information (e.g., I/O devices allocated to the process, a list of open files). </li>
+                    </ol></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="process-scheduling">
+            <h2>Process Scheduling</h2>
+
+            <h3 id="introduction-to-scheduling">Introduction to Scheduling</h3>
+            <p><strong>What is Scheduling?</strong></p>
+            <p>Scheduling determines which process/thread gets access to resources (e.g., CPU).  It ensures fairness, efficiency, and responsiveness. </p>
+            <p><strong>Goals of Scheduling:</strong> </p>
+            <ul>
+                <li>Maximize CPU utilization. </li>
+                <li>Minimize waiting time, response time, and turnaround time. </li>
+                <li>Achieve fairness and meet deadlines. </li>
+            </ul>
+
+            <h3 id="when-scheduling-occurs">When Scheduling Occurs</h3>
+            <p>Scheduling decisions are made during: </p>
+            <ol>
+                <li>Process creation. </li>
+                <li>Process termination. </li>
+                <li>Blocking for I/O. </li>
+                <li>Completion of I/O. </li>
+                <li>Periodic clock interrupts (in preemptive systems). </li>
+            </ol>
+
+            <h3 id="types-of-scheduling">Types of Scheduling</h3>
+            <ul>
+                <li><strong>Long-Term Scheduling:</strong> Decides which jobs to admit into the system. </li>
+                <li><strong>Medium-Term Scheduling:</strong> Suspends/resumes processes to manage memory. </li>
+                <li><strong>Short-Term Scheduling:</strong> Allocates CPU to ready processes. </li>
+            </ul>
+
+            <h3 id="batch-system-scheduling-algorithms">Batch System Scheduling Algorithms</h3>
+            <p>Batch systems handle jobs in a non-interactive way. Scheduling ensures efficient use of resources and determines the execution order of jobs.  Key algorithms include: </p>
+
+            <h4 id="first-come-first-served-fcfs--first-in-first-out-fifo">First-Come, First-Served (FCFS) / First-In, First-Out (FIFO)</h4>
+            <ul>
+                <li><strong>Mechanism:</strong> Non-preemptive. Processes are executed in the order they arrive. </li>
+                <li><strong>Pros:</strong> Easy to implement and fair in terms of arrival order. </li>
+                <li><strong>Cons:</strong> Can cause long waiting times due to the "Convoy Effect" (long jobs delay shorter ones).  Poor performance for mixed workloads. </li>
+                <li><strong>Example:</strong> A queue at a ticket counter where people are served in arrival order. </li>
+            </ul>
+            <p><strong>FCFS Calculation Example:</strong> </p>
+            <p>Given processes with burst times:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Process</th>
+                        <th>Burst Time (Milliseconds)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>P1</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>P2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>P3</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>P4</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>P5</td>
+                        <td>5</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Gantt Chart (Step 1):</strong> P1 (0-10) -> P2 (10-11) -> P3 (11-13) -> P4 (13-14) -> P5 (14-19)</p>
+            <p><strong>Waiting Time ($T_W$) (Step 2):</strong></p>
+            <ul>
+                <li>$T_W(P1) = 0$</li>
+                <li>$T_W(P2) = 10$</li>
+                <li>$T_W(P3) = 11$</li>
+                <li>$T_W(P4) = 13$</li>
+                <li>$T_W(P5) = 14$</li>
+                <li>Average Waiting Time = $(0 + 10 + 11 + 13 + 14) / 5 = 9.6$ Milliseconds</li>
+            </ul>
+            <p><strong>Turnaround Time ($T_T$) (Step 3):</strong> ($T_T = T_W + T_B$)</p>
+            <ul>
+                <li>$T_T(P1) = (0 + 10) = 10$</li>
+                <li>$T_T(P2) = (10 + 1) = 11$</li>
+                <li>$T_T(P3) = (11 + 2) = 13$</li>
+                <li>$T_T(P4) = (13 + 1) = 14$</li>
+                <li>$T_T(P5) = (14 + 5) = 19$</li>
+            </ul>
+
+            <h4>Shortest Job First (SJF)</h4>
+            <ul>
+                <li><strong>Mechanism:</strong> Selects the job with the shortest CPU burst time for execution.  If two processes have the same CPU burst time, FCFS is used to break ties. </li>
+                <li><strong>Benefits:</strong> Minimizes average waiting time, making it one of the most efficient scheduling algorithms.  Provides optimal scheduling by minimizing average waiting time. </li>
+                <li><strong>Challenges:</strong> Requires accurate estimation of job durations, which can be difficult. </li>
+                <li><strong>Drawback:</strong> Risk of starvation for longer jobs if shorter jobs continuously arrive. </li>
+                <li><strong>Example:</strong> A priority line where quicker tasks are served first. </li>
+            </ul>
+            <p><strong>SJF Calculation Example:</strong> </p>
+            <p>Given processes with burst times (assuming arrival at time 0, sorted by burst time):</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Process</th>
+                        <th>Burst Time (Milliseconds)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>P1</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>P2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>P3</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>P4</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>P5</td>
+                        <td>5</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Gantt Chart (Step 1):</strong> P2 (0-1) -> P4 (1-2) -> P3 (2-4) -> P5 (4-9) -> P1 (9-19)</p>
+            <p><strong>Waiting Time ($T_W$) (Step 2):</strong></p>
+            <ul>
+                <li>$T_W(P1) = 9$</li>
+                <li>$T_W(P2) = 0$</li>
+                <li>$T_W(P3) = 2$</li>
+                <li>$T_W(P4) = 1$</li>
+                <li>$T_W(P5) = 4$</li>
+                <li>Average Waiting Time = $(9 + 0 + 2 + 1 + 4) / 5 = 3.2$ Milliseconds</li>
+            </ul>
+            <p><strong>Turnaround Time ($T_T$) (Step 3):</strong> ($T_T = T_W + T_B$)</p>
+            <ul>
+                <li>$T_T(P1) = (9 + 10) = 19$</li>
+                <li>$T_T(P2) = (0 + 1) = 1$</li>
+                <li>$T_T(P3) = (2 + 2) = 4$</li>
+                <li>$T_T(P4) = (1 + 1) = 2$</li>
+                <li>$T_T(P5) = (4 + 5) = 9$</li>
+            </ul>
+
+            <h4>Priority Scheduling</h4>
+            <ul>
+                <li><strong>Mechanism:</strong> Processes are executed based on their assigned priority. The CPU is allocated to the process with the highest priority.  If processes have the same priority, FCFS is used. Priority can be high or low.  It can be preemptive or non-preemptive. </li>
+                <li><strong>Problem:</strong> Starvation can occur where low-priority processes may never get to run. </li>
+                <li><strong>Solution:</strong> Aging is a technique to gradually increase the priority of a process over time. </li>
+            </ul>
+            <p><strong>Priority Scheduling Example:</strong> </p>
+            <p>Given processes with burst times and priorities (lower number = higher priority):</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Process</th>
+                        <th>Burst Time (Milliseconds)</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>P1</td>
+                        <td>10</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>P2</td>
+                        <td>1</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>P3</td>
+                        <td>2</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>P4</td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>P5</td>
+                        <td>5</td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Gantt Chart (Step 1):</strong> P4 (0-1) -> P1 (1-11) -> P3 (11-13) -> P5 (13-18) -> P2 (18-19)</p>
+            <p><strong>Waiting Time ($T_W$) (Step 2):</strong></p>
+            <ul>
+                <li>$T_W(P1) = 1$</li>
+                <li>$T_W(P2) = 18$</li>
+                <li>$T_W(P3) = 11$</li>
+                <li>$T_W(P4) = 0$</li>
+                <li>$T_W(P5) = 13$</li>
+                <li>Average Waiting Time = $(1 + 18 + 11 + 0 + 13) / 5 = 8.6$ Milliseconds</li>
+            </ul>
+            <p><strong>Turnaround Time ($T_T$) (Step 3):</strong> ($T_T = T_W + T_B$)</p>
+            <ul>
+                <li>$T_T(P1) = (1 + 10) = 11$</li>
+                <li>$T_T(P2) = (18 + 1) = 19$</li>
+                <li>$T_T(P3) = (11 + 2) = 13$</li>
+                <li>$T_T(P4) = (0 + 1) = 1$</li>
+                <li>$T_T(P5) = (13 + 5) = 18$</li>
+            </ul>
+
+            <h3 id="interactive-system-scheduling-algorithms">Interactive System Scheduling Algorithms</h3>
+            <p>Interactive systems prioritize minimizing response time for user satisfaction.  They are common in personal computers, servers, and systems with multiple users.  Scheduling algorithms ensure fairness and efficiency for interactive tasks. </p>
+
+            <h4 id="round-robin-rr">Round-Robin (RR)</h4>
+            <ul>
+                <li><strong>Mechanism:</strong> Oldest and simplest scheduling algorithm.  Each process gets a fixed time quantum to execute.  If a process exceeds its quantum, the CPU switches to the next process.  Tasks are handled one at a time in equal slices to maintain responsiveness. </li>
+                <li><strong>Characteristics:</strong>
+                    <ul>
+                        <li>Average waiting time is usually long. </li>
+                        <li>Performance depends on the size of the time quantum (10 – 100 milliseconds). </li>
+                        <li>Process switching requires time; the time quantum clock is already running. </li>
+                        <li>A short time quantum leads to too many process switches, reducing CPU efficiency. </li>
+                        <li>A long time quantum leads to poor response for short interactive requests (similar to FCFS). </li>
+                    </ul>
+                </li>
+            </ul>
+            <p><strong>Round Robin Calculation Example:</strong> </p>
+            <p>Given processes with burst times, Time Slice = 2 Milliseconds:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Process</th>
+                        <th>Burst Time (Milliseconds)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>P1</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>P2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>P3</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>P4</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>P5</td>
+                        <td>5</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Gantt Chart (Step 1):</strong> P1 (0-2) -> P2 (2-3) -> P3 (3-5) -> P4 (5-6) -> P5 (6-8) -> P1 (8-10) -> P5 (10-12) -> P1 (12-14) -> P5 (14-15) -> P1 (15-17) -> P1 (17-19)</p>
+            <p><strong>Waiting Time ($T_W$) (Step 2):</strong></p>
+            <ul>
+                <li>$T_W(P1) = (0 + 6 + 2 + 1) = 9$</li>
+                <li>$T_W(P2) = 2$</li>
+                <li>$T_W(P3) = 3$</li>
+                <li>$T_W(P4) = 5$</li>
+                <li>$T_W(P5) = (6 + 2 + 2) = 10$</li>
+                <li>Average Waiting Time = $(9 + 2 + 3 + 5 + 10) / 5 = 5.8$ Milliseconds</li>
+            </ul>
+            <p><strong>Turnaround Time ($T_T$) (Step 3):</strong> ($T_T = T_W + T_B$)</p>
+            <ul>
+                <li>$T_T(P1) = (9 + 10) = 19$</li>
+                <li>$T_T(P2) = (2 + 1) = 3$</li>
+                <li>$T_T(P3) = (3 + 2) = 5$</li>
+                <li>$T_T(P4) = (5 + 1) = 6$</li>
+                <li>$T_T(P5) = (10 + 5) = 15$</li>
+            </ul>
+
+            <h4>Lottery Scheduling</h4>
+            <ul>
+                <li><strong>Mechanism:</strong> A randomized scheduling algorithm.  Each process is assigned lottery tickets.  The CPU selects a process by picking a random ticket.  Processes with more tickets have a higher chance of being selected. </li>
+                <li><strong>Fairness:</strong> Ensures fairness and prevents starvation as every process has a chance (even with one ticket).  Higher-priority processes can be given more tickets. </li>
+                <li><strong>Example:</strong> A fair draw determines the process execution order.  In a real-world analogy, a person with more lottery tickets has a higher chance of winning, but even someone with one ticket still has a chance. </li>
+                <li><strong>Ticket Allocation Example:</strong> Total Tickets: 100. Process A: 50 tickets (50% chance); Process B: 30 tickets (30% chance); Process C: 20 tickets (20% chance). More tickets = Higher chance to win CPU time. </li>
+            </ul>
+
+            <h3 id="real-time-scheduling">Real-Time Scheduling</h3>
+            <p>Used for time-critical systems. </p>
+
+            <h4 id="static-scheduling">Static Scheduling</h4>
+            <ul>
+                <li><strong>Mechanism:</strong> Decisions made before execution. </li>
+                <li><strong>Works well for:</strong> Systems with predictable and periodic workloads. </li>
+                <li><strong>Example:</strong> Control systems in industrial automation. </li>
+            </ul>
+
+            <h4 id="dynamic-scheduling">Dynamic Scheduling</h4>
+            <ul>
+                <li><strong>Mechanism:</strong> Adjusts decisions during runtime based on task requirements. </li>
+                <li><strong>Handles:</strong> Systems with unpredictable task arrivals. </li>
+                <li><strong>Example:</strong> Multimedia systems where tasks arrive irregularly. </li>
+            </ul>
+
+            <h4 id="rate-monotonic-scheduling-rms">Rate Monotonic Scheduling (RMS)</h4>
+            <ul>
+                <li>A static priority scheduling algorithm. </li>
+                <li>Tasks with shorter periods are given higher priority. </li>
+                <li>Assumes periodic tasks with known execution times. </li>
+                <li><strong>Example:</strong> Periodic sensor readings in real-time systems. </li>
+            </ul>
+
+            <h4 id="earliest-deadline-first-edf">Earliest Deadline First (EDF)</h4>
+            <ul>
+                <li>A dynamic priority scheduling algorithm. </li>
+                <li>Tasks are prioritized based on their closest deadlines. </li>
+                <li>Ensures high responsiveness for time-critical tasks. </li>
+                <li><strong>Example:</strong> Real-time data processing in financial markets. </li>
+            </ul>
+            <p><strong>Conclusion on Real-Time Scheduling:</strong> Static Scheduling is best for predictable workloads. Dynamic Scheduling handles unpredictable tasks efficiently. RMS prioritizes shorter-period tasks, while EDF focuses on meeting task deadlines. </p>
+
+            <h3 id="key-scheduling-terms">Key Scheduling Terms</h3>
+            <p>Understanding CPU Burst Time, Throughput, Turnaround Time, and Waiting Time. </p>
+
+            <h4 id="cpu-burst-time">CPU Burst Time</h4>
+            <p>The amount of time a process spends executing on the CPU.  It represents the processing time required by the CPU to complete a task.  For example, if a process needs 5 milliseconds of CPU time to complete, its CPU burst time is 5ms. </p>
+
+            <h4 id="throughput">Throughput</h4>
+            <p>The number of processes completed by the CPU in a specific amount of time.  High throughput means the system is completing tasks efficiently.  Example: If a system completes 10 processes in 1 second, its throughput is 10 processes per second. </p>
+
+            <h4 id="turnaround-time">Turnaround Time</h4>
+            <p>The total time taken for a process from submission to completion.  It includes CPU execution time, waiting time, and I/O operations.  Example: If a process is submitted at 2:00 PM and completes at 2:05 PM, its turnaround time is 5 minutes. </p>
+
+            <h4 id="waiting-time">Waiting Time</h4>
+            <p>The time a process spends waiting in the ready queue before getting CPU time.  It does not include execution or I/O time.  Example: If a process waits for 3 seconds before execution, its waiting time is 3 seconds. </p>
+
+            <h3 id="preemptive-vs-non-preemptive-scheduling">Preemptive vs. Non-Preemptive Scheduling</h3>
+            <ul>
+                <li><strong>Preemptive Scheduling:</strong>
+                    <ul>
+                        <li>The CPU can switch from one process to another even if the current process has not finished. </li>
+                        <li>Allows high-priority tasks to interrupt lower-priority tasks. </li>
+                        <li>Ensures better responsiveness and multitasking. </li>
+                        <li>Example: A phone call interrupting your music app on a smartphone. </li>
+                    </ul>
+                </li>
+                <li><strong>Non-Preemptive Scheduling:</strong>
+                    <ul>
+                        <li>The CPU completes the current process before switching to another. </li>
+                        <li>Simplifies process management but may lead to longer waiting times. </li>
+                        <li>Suitable for batch processing systems. </li>
+                        <li>Example: A printer queue processing jobs one by one without interruptions. </li>
+                    </ul>
+                </li>
+            </ul>
+            <p><strong>Comparison:</strong> Preemptive scheduling interrupts processes for higher-priority tasks and is better for multitasking and responsiveness.  Non-preemptive scheduling allows processes to run to completion without interruption, is simpler, but may cause delays for high-priority tasks. </p>
+
+            <h3 id="multiprocessor-scheduling">Multiprocessor Scheduling</h3>
+            <p>Multiprocessor scheduling manages tasks across multiple CPUs in a shared memory system.  Its goals are to optimize performance, maintain fairness, and ensure efficient CPU utilization. </p>
+            <p><strong>Challenges in Multiprocessor Scheduling:</strong> </p>
+            <ul>
+                <li><strong>Load Balancing:</strong> Ensures all CPUs handle an equal workload. </li>
+                <li><strong>CPU Affinity:</strong> Assigns tasks to the same CPU to maximize cache reuse. </li>
+            </ul>
+
+            <h4>Exam Ready Questions: Process Scheduling</h4>
+            <div class="exam-question">
+                <p><strong>Question 1:</strong> A batch system has five processes with the following burst times: P1 (8ms), P2 (3ms), P3 (5ms), P4 (3ms), P5 (6ms). Calculate the average waiting time and average turnaround time using the Shortest Job First (SJF) scheduling algorithm. Assume all processes arrive at time 0.</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    Sorted by Burst Time (and FCFS for tie-breaking): P2 (3ms), P4 (3ms), P3 (5ms), P5 (6ms), P1 (8ms).
+                    <br><strong>Gantt Chart:</strong> P2(0-3) -> P4(3-6) -> P3(6-11) -> P5(11-17) -> P1(17-25)
+                    <br><strong>Waiting Time ($T_W$):</strong>
+                    <ul>
+                        <li>$T_W(P2) = 0$</li>
+                        <li>$T_W(P4) = 3$</li>
+                        <li>$T_W(P3) = 6$</li>
+                        <li>$T_W(P5) = 11$</li>
+                        <li>$T_W(P1) = 17$</li>
+                        <li>Average Waiting Time = $(0 + 3 + 6 + 11 + 17) / 5 = 7.4$ ms</li>
+                    </ul>
+                    <br><strong>Turnaround Time ($T_T$):</strong>
+                    <ul>
+                        <li>$T_T(P2) = (0 + 3) = 3$</li>
+                        <li>$T_T(P4) = (3 + 3) = 6$</li>
+                        <li>$T_T(P3) = (6 + 5) = 11$</li>
+                        <li>$T_T(P5) = (11 + 6) = 17$</li>
+                        <li>$T_T(P1) = (17 + 8) = 25$</li>
+                        <li>Average Turnaround Time = $(3 + 6 + 11 + 17 + 25) / 5 = 12.4$ ms</li>
+                    </ul></p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 2:</strong> Explain the primary characteristic of Round-Robin (RR) scheduling and discuss how the choice of "time quantum" affects its performance, particularly concerning CPU efficiency and responsiveness.</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    The primary characteristic of Round-Robin (RR) scheduling is that each process is assigned a fixed time quantum (or time slice) to execute, and if the process doesn't complete within this quantum, the CPU switches to the next process. 
+                    The choice of time quantum significantly affects performance:
+                    <ul>
+                        <li>If the time quantum is too short, it leads to frequent process switches. While this can improve responsiveness, the overhead of context switching increases, reducing overall CPU efficiency. </li>
+                        <li>If the time quantum is too long, RR scheduling starts to behave like First-Come, First-Served (FCFS) scheduling. This can lead to poor response times for short interactive tasks, as a long-running process might monopolize the CPU for an extended period. </li>
+                    </ul></p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 3:</strong> Compare and contrast Rate Monotonic Scheduling (RMS) and Earliest Deadline First (EDF) in terms of their nature (static/dynamic) and how they prioritize tasks in real-time systems.</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    <ul>
+                        <li><strong>Rate Monotonic Scheduling (RMS):</strong> This is a static priority scheduling algorithm.  It assigns higher priorities to tasks with shorter periods (i.e., tasks that need to run more frequently).  Scheduling decisions are made before execution. </li>
+                        <li><strong>Earliest Deadline First (EDF):</strong> This is a dynamic priority scheduling algorithm.  It prioritizes tasks based on their closest deadlines, meaning the task with the earliest deadline is executed first.  Scheduling decisions are adjusted during runtime based on task requirements. </li>
+                    </ul>
+                    In summary, RMS is static and prioritizes based on frequency, while EDF is dynamic and prioritizes based on urgency (deadlines). </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="memory-management">
+            <h2>Memory Management</h2>
+
+            <h3 id="introduction-to-memory-management">Introduction to Memory Management</h3>
+            <p>Memory management is a crucial component of an operating system that ensures efficient use of main memory (RAM).  It involves tracking memory usage, allocating memory to processes, and deallocating memory when processes terminate. </p>
+            <p><strong>Objectives of Memory Management:</strong> </p>
+            <ul>
+                <li>Provide an abstraction of memory for users. </li>
+                <li>Optimize memory usages and performance. </li>
+                <li>Prevent unauthorized access between processes. </li>
+                <li>Support multitasking and virtual memory. </li>
+            </ul>
+
+            <h3 id="memory-hierarchy">Memory Hierarchy</h3>
+            <p>Memory hierarchy consists of different types of memory, balancing speed, cost, and capacity. </p>
+            <ul>
+                <li><strong>Registers:</strong> Fastest and smallest, inside the CPU. </li>
+                <li><strong>Cache Memory:</strong> Small and fast, closer to the CPU. </li>
+                <li><strong>Main Memory (RAM):</strong> Medium-speed, volatile. </li>
+                <li><strong>Secondary Storage (HDD/SSD):</strong> Large, non-volatile. </li>
+                <li><strong>Virtual Memory:</strong> Uses disk storage to extend RAM. </li>
+            </ul>
+
+            <h3 id="memory-management-strategies">Memory Management Strategies</h3>
+            <ul>
+                <li><strong>No Memory Abstraction:</strong> Direct access to physical memory. </li>
+                <li><strong>Memory Partitioning:</strong> Fixed & dynamic partitions. </li>
+                <li><strong>Address Binding:</strong> Compile-time, Load-time, Execution-time. </li>
+                <li><strong>Swapping:</strong> Moves processes between RAM & disk. </li>
+                <li><strong>Memory Overlays:</strong> Loads necessary portions into memory. </li>
+                <li><strong>Virtual Memory:</strong> Extends RAM by using disk storage, allowing large programs to run on limited physical memory. </li>
+            </ul>
+
+            <h3 id="no-memory-abstraction">No Memory Abstraction</h3>
+            <ul>
+                <li>Early computers had no memory abstraction; programs accessed physical memory directly. </li>
+                <li>Only one program could run at a time. </li>
+                <li>Operating system could be placed in ROM or RAM. </li>
+            </ul>
+
+            <h3 id="physical-and-logical-memory">Physical and Logical Memory</h3>
+            <ul>
+                <li>Memory is divided into logical and physical addresses. 
+                    <ul>
+                        <li>Logical addresses </li>
+                        <li>Physical addresses </li>
+                    </ul>
+                </li>
+                <li><strong>Logical Address:</strong> An address generated by the CPU. </li>
+                <li><strong>Physical Address:</strong> Address seen by the memory unit, loaded into the memory address register. </li>
+                <li>The Memory Management Unit (MMU) is a hardware device that maps logical addresses to physical addresses. </li>
+            </ul>
+
+            <h3 id="base-and-limit-registers">Base and Limit Registers</h3>
+            <ul>
+                <li>A pair of base and limit registers define the logical address space. </li>
+                <li>The CPU must check every memory access generated in user mode to ensure it is between the base and limit for that user. </li>
+            </ul>
+
+            <h3 id="hardware-address-protection">Hardware Address Protection</h3>
+            <p>A diagram illustrates how hardware uses base and limit registers to protect memory. If an address generated by the CPU is outside the permitted range (defined by base and base + limit), a trap to the operating system monitor (addressing error) occurs. </p>
+
+            <h3 id="address-binding">Address Binding</h3>
+            <p>Address binding maps symbolic addresses to physical memory addresses. </p>
+            <p><strong>Stages:</strong></p>
+            <ul>
+                <li><strong>Compile-time Binding:</strong> Address determined at compile time.  Example: Embedded firmware, MS-DOS COM files. </li>
+                <li><strong>Load-time Binding:</strong> Address determined when the program is loaded.  Example: DLLs, Static library loading. </li>
+                <li><strong>Execution-time Binding:</strong> Uses a memory management unit (MMU) for dynamic mapping.  Addresses dynamically mapped at runtime. Example: Virtual Memory, Paging, MMU. </li>
+            </ul>
+
+            <h3 id="swapping">Swapping</h3>
+            <p>Swapping transfers processes between main memory and secondary storage (Disk).  It frees up memory for other processes.  However, it can lead to performance issues due to disk I/O. </p>
+            <p>A schematic view of swapping shows processes P1 and P2 being swapped in and out between main memory and a backing store (disk). </p>
+
+            <h3 id="overlays">Overlays</h3>
+            <p>Overlays are a technique to handle programs larger than the physical memory.  They allow only necessary instructions and data to be loaded into memory.  The rest of the program is loaded as needed and is managed by the user, not the OS. </p>
+            <p>The entire program and data of a process must be in physical memory for execution.  The size of a process is limited by the size of physical memory.  Overlays are used if a process is larger than available memory. </p>
+            <p>Overlays keep only necessary instructions and data in memory at any given time.  When other instructions are needed, they are loaded into space previously occupied by instructions that are no longer needed.  Overlays are implemented by the user; no special OS support is needed, but the programming design of overlay structure is complex. </p>
+
+            <h3 id="single-tasking-with-overlay">Single Tasking With Overlay</h3>
+            <p>Applies overlays in a single-tasking OS environment.  Only one program runs at a time in a single-tasking system.  It uses overlays to manage memory by loading necessary parts of the running program.  This enables running larger programs in limited memory. </p>
+            <p><strong>Disadvantage:</strong> A process cannot take advantage of more memory if it is available since overlays are designed around a given amount of memory. </p>
+
+            <h3 id="memory-partitioning">Memory Partitioning</h3>
+            <p>Memory partitioning is the process of dividing the system's memory into separate sections to efficiently allocate space to various processes.  Dividing the memory space into partitions is the simplest form of memory management. </p>
+            <ul>
+                <li><strong>Fixed Partitioning:</strong> Divides memory into fixed-sized partitions. </li>
+                <li><strong>Variable Partitioning:</strong> Divides memory based on process requirements. </li>
+            </ul>
+
+            <h4>Memory Partitioning - Fixed</h4>
+            <ul>
+                <li>Fixed partitioning divides memory into fixed spaces. </li>
+                <li>Each partition may contain exactly one process. </li>
+                <li>The degree of multiprogramming is bound by the number of partitions. </li>
+                <li>When a partition is free, a process is selected from the input queue and loaded into the free partition. </li>
+                <li>When a process terminates, the partition becomes available for another process. </li>
+                <li>Fixed memory partitioning allocates one process for one partition. </li>
+            </ul>
+
+            <h4>Memory Partitioning - Variable</h4>
+            <ul>
+                <li>When a process arrives and needs memory, the system searches for a large enough space for this process. </li>
+                <li>It loads the process wherever the memory space is available using first fit, best fit, or worst fit algorithms. </li>
+                <li><strong>First Fit:</strong> Allocates the first space available that will fit the process. </li>
+                <li><strong>Best Fit:</strong> Allocates the smallest space that will fit the process. </li>
+                <li><strong>Worst Fit:</strong> Allocates the largest space available. </li>
+                <li>Can lead to fragmentation issues. </li>
+            </ul>
+
+            <h3 id="fragmentation">Fragmentation</h3>
+            <p>Memory partitioning techniques can lead to fragmentation. </p>
+            <ul>
+                <li><strong>Internal Fragmentation:</strong> Wasted space within allocated memory blocks. </li>
+                <li><strong>External Fragmentation:</strong> Small free spaces that cannot be used for new allocations. </li>
+            </ul>
+            <p>Fragmentation happens when memory spaces are used in such a way that small pieces of memory are left unused.  It occurs naturally when you frequently use a disk, creating, deleting, and modifying files. </p>
+
+            <h4 id="internal-fragmentation">Internal Fragmentation</h4>
+            <ul>
+                <li>When extra spaces are allocated to a process, the difference between the allocated space and the actual need results in internal fragmentation. </li>
+                <li>Fixed partitioning leads to internal fragmentation as extra memory allocated to a program which is not used cannot be used elsewhere. </li>
+            </ul>
+
+            <h4 id="external-fragmentation">External Fragmentation</h4>
+            <ul>
+                <li>Too many small sized free spaces. </li>
+                <li>These small spaces cannot be used for anything as they are not contiguous. </li>
+                <li>Although enough total space exists, they cannot be allocated because they are not contiguous. </li>
+                <li>Variable partitioning leads to external fragmentation. </li>
+                <li>To resolve external fragmentation, a technique called <strong>compaction</strong> is used.  Compaction shuffles all free memory spaces together to form a large block. </li>
+            </ul>
+
+            <h4>Exam Ready Questions: Memory Management</h4>
+            <div class="exam-question">
+                <p><strong>Question 1:</strong> Why is memory management important in operating systems? State at least two key objectives.</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    Memory management is crucial because it ensures the efficient use of the computer's main memory (RAM). 
+                    Two key objectives include:
+                    <ol>
+                        <li>Optimizing memory usage and overall system performance. </li>
+                        <li>Preventing unauthorized access to memory between different processes. </li>
+                        <li>Supporting multitasking and virtual memory. </li>
+                    </ol></p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 2:</strong> Differentiate between "internal fragmentation" and "external fragmentation," and identify which memory partitioning technique typically leads to each.</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    <ul>
+                        <li><strong>Internal Fragmentation:</strong> This occurs when memory is allocated in fixed-size blocks, and a process is assigned a block larger than its actual memory requirement. The unused space within that allocated block is wasted. Fixed partitioning typically leads to internal fragmentation. </li>
+                        <li><strong>External Fragmentation:</strong> This happens when there is enough total free memory space to satisfy a request, but the available free spaces are scattered in small, non-contiguous blocks across memory. Variable partitioning typically leads to external fragmentation. </li>
+                    </ul></p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 3:</strong> Explain the concept of "Address Binding" in memory management and briefly describe its three main stages.</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    Address binding is the process of mapping symbolic addresses (used by programmers) to physical memory addresses.  Its three main stages are:
+                    <ol>
+                        <li><strong>Compile-time Binding:</strong> Addresses are determined and fixed during the compilation of the program.  This is suitable for programs where the physical memory location is known in advance (e.g., embedded firmware). </li>
+                        <li><strong>Load-time Binding:</strong> Addresses are determined when the program is loaded into memory.  The loader assigns the absolute physical addresses. </li>
+                        <li><strong>Execution-time Binding:</strong> Addresses are determined dynamically during the program's execution.  This is the most flexible method and uses a Memory Management Unit (MMU) for dynamic address mapping, crucial for virtual memory systems. </li>
+                    </ol></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="virtual-memory">
+            <h2>Virtual Memory</h2>
+
+            <h3 id="introduction-to-virtual-memory">Introduction to Virtual Memory</h3>
+            <p>Virtual Memory is a memory abstraction that separates logical memory from physical memory.  It allows processes to execute even if they are not entirely loaded into RAM.  It uses a combination of main memory and disk space to provide an illusion of a large memory.  Virtual memory is implemented using Paging or Segmentation techniques. </p>
+
+            <h3 id="understanding-virtual-memory">Understanding Virtual Memory</h3>
+            <p>Each program operates within its own address space, divided into fixed-size pages.  Pages are mapped onto physical memory. </p>
+            <p>When a program accesses a page in RAM, the system translates virtual to physical addresses automatically.  If a program requests a page not in RAM, the operating system loads the missing page from disk and resumes execution.  This allows efficient memory usage, enabling programs to run even when their memory needs exceed available physical RAM. </p>
+
+            <h3 id="paging-overview">Paging Overview</h3>
+            <p>Paging divides the process into fixed-size pages and memory into fixed-size frames.  A Page Table is used to map virtual pages to physical frames.  Paging eliminates external fragmentation but may have internal fragmentation.  It uses a Translation Lookaside Buffer (TLB) for faster address translation. </p>
+
+            <h3 id="paged-memory-allocation">Paged Memory Allocation</h3>
+            <p>Paged Memory Allocation divides each incoming job into pages of equal size.  Before executing a program, the Memory Manager determines the number of pages, locates enough empty page frames in main memory, and loads all the program's pages into page frames. </p>
+            <p>When the program is initially prepared for loading, its pages are in logical sequence.  However, the program pages do not have to be loaded in adjacent memory.  Each page can be stored in any available page frame anywhere in main memory.  The primary advantage of storing programs in non-contiguous locations is that main memory is used more efficiently because an empty page frame can be used by any page of any job. </p>
+            <p>The Memory Manager uses three tables for tracking program pages, all residing in the part of main memory reserved for the OS: </p>
+            <ul>
+                <li><strong>Job Table (JT):</strong> Contains two values for each active job: size of job and the memory location where its PMT is stored. The Job Table is a dynamic list that grows as jobs are loaded and shrinks as they complete. </li>
+                <li><strong>Page Map Table (PMT):</strong> Each active job has its own PMT.  It contains vital information for each page: the page number and its corresponding page frame memory address. Pages are sequential (Page 0, Page 1, Page 2, through the last page). </li>
+                <li><strong>Memory Map Table (MMT):</strong> Has one entry for each page frame, listing its location and free/busy status. </li>
+            </ul>
+            <p>To find the address of a given program instruction, the byte number is divided by the page size, keeping the remainder as an integer.  The resulting quotient is the page number, and the remainder is the displacement within that page.  This procedure gives the location of an instruction with respect to the job's pages.  Pages are only relative; each page is actually stored in a page frame that can be located anywhere in available memory. </p>
+            <p>To find the exact location of a line in memory: </p>
+            <ol>
+                <li>Perform the arithmetic computation to determine the page number and displacement of the requested byte (e.g., 214). </li>
+                <li>Page Number = the integer quotient from the division of the job space address by the page size (e.g., 2). </li>
+                <li>Displacement = the remainder from the page number division (e.g., 14). </li>
+                <li>Refer to the job's PMT to determine which page frame contains the required page. </li>
+                <li>Example: Page 2 is located in Page Frame 5. </li>
+            </ol>
+            <p><strong>Advantages of Paging:</strong> It allows jobs to be allocated in non-contiguous memory locations, using memory more efficiently.  More jobs can fit into main memory. </p>
+            <p><strong>Disadvantages of Paging:</strong> Overhead is increased, and internal fragmentation is still a problem on the last page of each job.  The entire job must be stored in memory. Page size selection is crucial: too small a page size generates very long PMTs, while too large a page size results in excessive internal fragmentation.  The best size depends on the job environment, the nature of jobs, and system constraints. </p>
+
+            <h3 id="demand-paging">Demand Paging</h3>
+            <p>A technique where pages are loaded into memory only when needed.  It reduces memory usage by keeping only necessary pages in RAM.  A Page Fault occurs when a referenced page is not in memory, triggering a swap-in operation.  Demand paging improves memory efficiency but increases page fault handling overhead. </p>
+
+            <h3 id="page-replacement-policies">Page Replacement Policies</h3>
+            <p>When a new page needs to be loaded but memory is full, a replacement policy is used to remove an existing page.  The Page Replacement Policy is crucial to the efficiency of the system. </p>
+            <p>Two of the most well-known page replacement policies are: </p>
+
+            <h4 id="first-in-first-out-fifo-policy">First-In First-Out (FIFO) Policy</h4>
+            <ul>
+                <li>Replaces the oldest page in memory. </li>
+                <li>Will remove the pages that have been in memory the longest. </li>
+                <li>Suffers from <strong>Belady's Anomaly</strong>. </li>
+            </ul>
+            <p><strong>FIFO Policy Example:</strong>
+            Perform an analysis using First-In-First-Out (FIFO) Algorithm for the following string of memory reference addresses: `7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0, 1`. Assume there are three frames available within the memory for holding pages. </p>
+            <p>Number of Page Faults: 15. </p>
+
+            <h4 id="beladys-anomaly">Belady's Anomaly</h4>
+            <p>Belady was a pioneer in modern operating systems who studied page replacement schemes.  Logically, increasing memory frames should decrease page faults.  However, his experiments showed that for certain memory reference strings, increasing the number of memory frames increased the number of page faults.  This contradicts the commonly accepted belief, and his results are classified as Belady's anomaly. </p>
+            <p>In computer storage, Belady's anomaly is the phenomenon where increasing the number of page frames results in an increase in the number of page faults for a given memory access pattern.  This phenomenon is commonly experienced when using the First-In First-Out (FIFO) page replacement algorithm. </p>
+            <p>When a page fault occurs and all frames are in use, one must be cleared for the new page.  FIFO is a simple algorithm: the page that has been in the frames the longest is cleared.  Before Belady's anomaly was demonstrated, it was believed that more page frames would always result in the same or fewer page faults. </p>
+            <p>A graph illustrates the page-fault curve for FIFO replacement on a reference string, showing the anomaly where faults increase with more frames. </p>
+
+            <h4 id="optimal-page-replacing-policy">Optimal Page Replacing Policy</h4>
+            <p>Belady's anomaly led to the search for new algorithms. </p>
+            <p><strong>Optimal Policy:</strong></p>
+            <ul>
+                <li>Has the lowest page fault for a fixed number of frames. </li>
+                <li>Does not suffer from Belady's anomaly. </li>
+                <li>Replaces the page that will not be used for the longest period of time in the future. </li>
+                <li>Difficult to implement as it requires future knowledge of the reference string. </li>
+            </ul>
+            <p><strong>Optimal Policy Example:</strong>
+            Perform an analysis using Optimal Algorithm for the following string of memory reference addresses: `7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0, 1`. Assume there are three frames available within the memory for holding pages. </p>
+            <p>Number of Page Faults: 9. </p>
+
+            <h4 id="least-recently-used-policy">Least Recently Used (LRU) Policy</h4>
+            <ul>
+                <li>Associates each page with the time of when the page was last used. </li>
+                <li>When a page needs to be replaced, the page that has not been used for the longest period will be chosen. </li>
+                <li>This is a technique of looking backwards in time. </li>
+            </ul>
+            <p><strong>LRU Policy Example:</strong>
+            Perform an analysis using the Least Recently Used algorithm for the following string of memory reference addresses: `7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0, 1`. Assume there are three frames available within the memory for holding pages. </p>
+            <p>Number of Page Faults: 12. </p>
+
+            <h4 id="random-replacement-policy">Random Replacement Policy</h4>
+            <ul>
+                <li>Chooses any page to replace at random. </li>
+                <li>Assumes that the next page to be referenced is chosen randomly. </li>
+            </ul>
+
+            <h4 id="second-chance-policy-clock-page-replacement-policy">Second Chance Policy (Clock Page Replacement Policy)</h4>
+            <ul>
+                <li>A FIFO replacement algorithm with a small modification, making it similar to LRU. </li>
+                <li>When a page is selected in FIFO order, its reference bit is checked. </li>
+                <li>If the reference bit is set to 1 (recently referenced), it is reset to 0, and another page is looked for. </li>
+                <li>Also known as the Clock Page Replacement Policy, it requires hardware support to track the reference bit. </li>
+                <li>Implemented with a circular queue and a pointer that steps through the reference bits, simulating a clockwise motion. </li>
+                <li>The algorithm is paced according to the computer's clock cycle.  The time span between two ticks in its system clock. </li>
+                <li>If the reference bit is 0, the page is targeted for removal. </li>
+                <li>If all reference bits are 1, the pointer cycles through the queue again, giving each page a second (or third, fourth) chance. </li>
+            </ul>
+
+            <h3 id="thrashing">Thrashing</h3>
+            <p>Thrashing occurs when excessive page swapping reduces CPU utilization.  This happens when a process does not have enough frames, leading to continuous page faults.  It can be avoided using Working Set Model or Page Fault Frequency algorithms.  Proper memory allocation policies can help mitigate thrashing. </p>
+
+            <h3 id="performance-considerations">Performance Considerations</h3>
+            <ul>
+                <li><strong>Page Table Size:</strong> Affects memory usage; multi-level page tables help reduce size. </li>
+                <li><strong>TLB (Translation Lookaside Buffer):</strong> Improves speed of address translation. </li>
+                <li><strong>Page Size Selection:</strong> Large pages reduce page table size but increase internal fragmentation. </li>
+                <li><strong>Disk I/O:</strong> Faster storage devices improve virtual memory performance. </li>
+            </ul>
+
+            <h4>Exam Ready Questions: Virtual Memory</h4>
+            <div class="exam-question">
+                <p><strong>Question 1:</strong> A program has four pages, each with a size of 100 bytes. The program uses a page mapping table (PMT) for translation. Given the following PMT table:
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Page Number</th>
+                            <th>Frame Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>4</td>
+                        </tr>
+                    </tbody>
+                </table>
+                If a process tries to access a virtual address of 515 bytes, what would be the corresponding physical address? </p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    Given: Page Size = 100 bytes. Virtual Address = 515 bytes.
+                    <br>Page Number = Virtual Address / Page Size = 515 / 100 = 5 (integer quotient).
+                    <br>Offset = Virtual Address % Page Size = 515 % 100 = 15.
+                    <br>Looking at the PMT, there is no entry for Page Number 5. This indicates a page fault. However, assuming the question implies a valid address that would translate, and if we were to pick the closest valid page based on the structure, we'd need to re-evaluate the question's premise.
+                    <br>Let's re-examine the given options (A) 346, (B) 346 (with offset 46), (C) 446, (D) 446 (with offset 46). These options suggest a different page size or calculation. Let's assume the question intended a virtual address within the defined pages, or perhaps the PMT is incomplete for a full calculation.
+                    <br><br>Let's re-evaluate using a different approach from the slide example.
+                    <br>The question is designed to test understanding of page number and offset.
+                    <br>For Virtual Address 515 with page size 100:
+                    <br>Page Number = 515 / 100 = 5 (quotient)
+                    <br>Offset = 515 % 100 = 15
+                    <br>From the provided PMT, we only have entries for Page Numbers 0, 1, and 2. This implies that a virtual address of 515 would cause a page fault or is outside the valid range defined by the PMT. None of the given options (A, B, C, D) would directly map from page number 5.
+                    <br><br>Let's consider the context of the provided slide's example: If a process tries to access a virtual address of 515 bytes, what would be the corresponding physical address?  The options provided in the slide are A) 346, B) 346 (with offset 46), C) 446, D) 446 (with offset 46). Without further context or an updated PMT, this question cannot be definitively answered based on the provided PMT with a page size of 100.
+                    <br><br>However, if we use the example from slide 18:
+                    <br>Q1. A program has four pages, each with a size of 256 bytes. 
+                    <br>Given PMT:
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Page Number</th>
+                                <th>Frame Number</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>If a process tries to access a virtual address of 515 bytes, what would be the corresponding physical address? 
+                    <br>Page Size = 256 bytes. Virtual Address = 515 bytes.
+                    <br>Page Number = 515 / 256 = 2 (quotient, since 2 * 256 = 512).
+                    <br>Offset = 515 % 256 = 3.
+                    <br>From the PMT, Page Number 2 maps to Frame Number 7.
+                    <br>Physical Address = (Frame Number * Page Size) + Offset
+                    <br>Physical Address = (7 * 256) + 3 = 1792 + 3 = 1795.
+                    <br>The options for this specific slide are A) 771, B) 771 (with offset 3), C) 819, D) 819 (with offset 3). Again, none of these options match 1795. This indicates that the question or options provided in the slide might be mismatched or require a different interpretation.
+                    <br><br>Let's analyze the question from slide 19:
+                    <br>Q2. A program has five pages, each with a size of 128 bytes. 
+                    <br>Given PMT: 
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Page Number</th>
+                                <th>Frame Number</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>If a process tries to access a virtual address of 290 bytes, what would be the corresponding physical address? 
+                    <br>Page Size = 128 bytes. Virtual Address = 290 bytes.
+                    <br>Page Number = 290 / 128 = 2 (quotient, since 2 * 128 = 256).
+                    <br>Offset = 290 % 128 = 34.
+                    <br>From the PMT, Page Number 2 maps to Frame Number 1.
+                    <br>Physical Address = (Frame Number * Page Size) + Offset
+                    <br>Physical Address = (1 * 128) + 34 = 128 + 34 = 162.
+                    <br>The options are A) 418, B) 418 (with offset 34), C) 466, D) 466 (with offset 34). None of these options match 162.
+                    <br><br>Due to the discrepancy between the provided questions/options and the tables in the slides, it's impossible to provide a matching answer from the given choices while adhering strictly to the calculations. The methodology for solving such a problem is demonstrated above, but the numbers in the provided slides for these questions don't yield the given multiple-choice answers. I will provide the correct calculation steps for the *intent* of the question.
+
+                    <br><br><strong>Re-attempting the first question assuming there might be an error in the given virtual address or page size for the options to match, but providing the correct calculation method:</strong>
+                    <br>Assume a Page Size of 100 bytes and a Virtual Address of 515 bytes.
+                    <br>Page Number = floor(515 / 100) = 5
+                    <br>Offset = 515 % 100 = 15
+                    <br>If Page Number 5 mapped to Frame Number 4 (hypothetically, to get closer to 446):
+                    <br>Physical Address = (Frame Number * Page Size) + Offset = (4 * 100) + 15 = 400 + 15 = 415. This is still not 446.
+                    <br>If Page Number 5 mapped to Frame Number 4 and offset was 46:
+                    <br>Physical Address = (4 * 100) + 46 = 446.
+                    <br>So, option (D) 446 (with offset 46) would be correct IF Page 5 mapped to Frame 4 AND the offset was 46 (which implies VA was 546). This means the original question "515 bytes" or "offset 46" might be a typo.
+                    <br><strong>Assuming the question intended Page Number 4 to map to Frame Number 4, and offset 46:</strong>
+                    <br>VA = 4*100 + 46 = 446. This would make the corresponding physical address 446 (with offset 46).
+                    <br>Therefore, based on the provided options in the slide, it is plausible that the question implicitly expects mapping to a frame that, when multiplied by the page size, gets close to the answer, and then using the offset.
+                    <br>For 515 bytes, Page No. = 5, Offset = 15. If Page 5 maps to Frame 4, PA = 400+15 = 415.
+                    <br>If the intended virtual address for option D was 446, then Page Number = 4, Offset = 46. If Page 4 mapped to Frame 4, then PA = (4 * 100) + 46 = 446.
+                    <br>Given the discrepancies, a definitive answer is hard without clarification. However, the mechanism is Page Number = VA / Page Size, Offset = VA % Page Size. Then Physical Address = (Frame Number * Page Size) + Offset.
+                    </p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 2:</strong> Explain the concept of "Belady's Anomaly" in the context of page replacement policies and identify which common algorithm is known to suffer from it.</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    Belady's Anomaly is a phenomenon in computer storage where increasing the number of available page frames for a process can paradoxically lead to an *increase* in the number of page faults for a given memory access pattern.  This contradicts the intuitive expectation that more memory should always result in fewer or the same number of page faults. 
+                    The common page replacement algorithm known to suffer from Belady's Anomaly is the <strong>First-In First-Out (FIFO)</strong> algorithm. </p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 3:</strong> Describe "Thrashing" in virtual memory systems and explain why it is a problem. What are two general approaches to mitigate thrashing?</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    Thrashing occurs when a process experiences an extremely high rate of page faults, leading to excessive page swapping between main memory and secondary storage (disk). This continuous swapping drastically reduces CPU utilization because the CPU spends most of its time swapping pages in and out rather than executing actual instructions.  It's a problem because it severely degrades system performance. 
+                    Two general approaches to mitigate thrashing are:
+                    <ol>
+                        <li>Using page replacement algorithms that consider a process's locality of reference, such as the Working Set Model or Page Fault Frequency algorithms. </li>
+                        <li>Implementing proper memory allocation policies to ensure that processes have a sufficient number of frames allocated to them, thereby reducing the frequency of page faults. </li>
+                    </ol></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="file-management">
+            <h2>File Management</h2>
+
+            <h3 id="introduction-to-file-systems">Introduction to File Systems</h3>
+            <p>A file system is the way an operating system organizes and manages data stored on a disk.  It acts as an abstraction layer to simplify data management for users.  It helps in saving, locating, and retrieving files efficiently. </p>
+            <p><strong>Three Key Requirements for File Systems:</strong> </p>
+            <ul>
+                <li>Must handle large amounts of data. </li>
+                <li>Data must persist beyond program execution (not lost when power is off). </li>
+                <li>Must support multiple processes accessing files simultaneously. </li>
+            </ul>
+
+            <h3 id="why-do-we-need-long-term-storage">Why Do We Need Long-Term Storage?</h3>
+            <p>RAM (memory) is fast but volatile (data is lost when the computer shuts down).  Data should stay even after the program stops.  We use non-volatile storage like HDDs, SSDs, and USB drives to store data permanently.  Many programs should be able to use the stored data at the same time. </p>
+            <p>Long-term storage is used by: </p>
+            <ul>
+                <li>Software applications to save settings. </li>
+                <li>Operating systems to store configuration files. </li>
+                <li>Users to store personal data (photos, videos, documents). </li>
+            </ul>
+
+            <h3 id="file">File</h3>
+            <p>A file is a named collection of related information that is recorded on secondary storage.  From a user's view, a file is the smallest unit of storage.  Data can only be saved on secondary storage if it is inside a file.  Files can contain different kinds of information. </p>
+            <ul>
+                <li><strong>OS point of view:</strong> At least two types: data, executable programs. </li>
+                <li><strong>User point of view:</strong> Text, numeric, multimedia, etc. </li>
+            </ul>
+            <p><strong>Files Can be:</strong></p>
+            <ul>
+                <li>Text files (.txt, .docx) </li>
+                <li>Executable files (.exe, .bin) </li>
+                <li>Multimedia files (.mp3, .jpg) </li>
+            </ul>
+            <p>A filesystem (or file system, or FS) is the part of an OS responsible for: </p>
+            <ul>
+                <li>Providing an abstract view of files to users and programs. </li>
+                <li>Translating file operations to I/O operations on mass storage devices. </li>
+            </ul>
+
+            <h3 id="file-attributes">File Attributes</h3>
+            <p>In addition to their content, files are associated with several <strong>file attributes</strong>, also known as metadata (information about the file): </p>
+            <ul>
+                <li><strong>Name:</strong> Human-readable name (e.g., "report.docx"). </li>
+                <li><strong>Identifier:</strong> Unique tag (number) identifies file within file system; unique number assigned by the OS. </li>
+                <li><strong>Type:</strong> Describes file content (text, image, executable). </li>
+                <li><strong>Location (physical):</strong> Where it is stored on disk. </li>
+                <li><strong>Size:</strong> Amount of space it uses (current file size). </li>
+                <li><strong>Protection:</strong> Who can read, write, or execute it. </li>
+                <li><strong>Timestamps:</strong> When it was created, modified, or accessed. </li>
+            </ul>
+            <p>These attributes are stored in the <strong>File Control Block (FCB)</strong> of each file.  There are many variations across OSes, including extended file attributes such as file checksums. </p>
+
+            <h3 id="file-operations">File Operations</h3>
+            <p>OS provides system calls for file management: </p>
+            <ul>
+                <li><strong>Create:</strong> Make a new file. </li>
+                <li><strong>Read:</strong> Retrieve content. </li>
+                <li><strong>Write:</strong> Add/modify content. </li>
+                <li><strong>Seek:</strong> Move the pointer within the file. </li>
+                <li><strong>Delete:</strong> Remove file. </li>
+                <li><strong>Truncate:</strong> Remove file content without deleting the file. </li>
+            </ul>
+            <p><strong>Advanced Operations:</strong></p>
+            <ul>
+                <li><strong>Lock/Unlock:</strong> Prevent or allow access to a file by others. </li>
+                <li><strong>Memory Mapping:</strong> File contents mapped into memory space. </li>
+            </ul>
+
+            <h3 id="file-naming-conventions">File Naming Conventions</h3>
+            <p>File names can include letters, numbers, underscores, and periods. </p>
+            <p>Case sensitivity varies: </p>
+            <ul>
+                <li><strong>Windows:</strong> Not case-sensitive. </li>
+                <li><strong>Linux:</strong> Case-sensitive. </li>
+            </ul>
+            <p>Max filename length: usually 255 characters. </p>
+
+            <h3 id="file-structure">File Structure</h3>
+            <p>Files can be structured in different ways: </p>
+            <ol>
+                <li><strong>Byte Sequence:</strong> Treats files as streams of bytes (most common/ used in UNIX and Windows). </li>
+                <li><strong>Record Sequence:</strong> Organized in records (fixed-length) (legacy mainframe systems). </li>
+                <li><strong>Tree-structured:</strong> Indexed files, used in databases. </li>
+            </ol>
+
+            <h3 id="file-system-architecture">File System Architecture</h3>
+            <p>File System Architecture Components: </p>
+            <ul>
+                <li><strong>Files:</strong> Contain actual data. </li>
+                <li><strong>Directories:</strong> Organize files in a tree. </li>
+                <li><strong>Metadata:</strong> Info about files. </li>
+                <li><strong>FAT/Inodes:</strong> Track file storage blocks. </li>
+                <li><strong>Free Space Manager:</strong> Tracks available disk space. </li>
+            </ul>
+
+            <h3 id="file-allocation-methods">File Allocation Methods</h3>
+            <p>Allocation methods are used in the design of file systems.  A file system is software that manages the storage and retrieval of data on a disk or partition.  File systems implement one or more allocation methods to organize files: </p>
+
+            <h4 id="contiguous-allocation">Contiguous Allocation</h4>
+            <ul>
+                <li><strong>Mechanism:</strong> Files stored in continuous blocks (fast but inflexible). </li>
+                <li><strong>Pros:</strong> Fast, simple. Best performance for sequential access. Easy to calculate physical addresses. </li>
+                <li><strong>Cons:</strong> External fragmentation, resizing issues. Requires pre-allocation of file size. Compaction may be needed to free up space. </li>
+            </ul>
+
+            <h4 id="linked-allocation-non-contiguous-allocation">Linked Allocation (Non-Contiguous Allocation)</h4>
+            <ul>
+                <li><strong>Mechanism:</strong> Files stored in linked blocks (flexible but slower). </li>
+                <li><strong>Pros:</strong> No fragmentation. File size can grow dynamically. Good for sequential access. </li>
+                <li><strong>Cons:</strong> Slow due to pointer overhead. If a pointer is lost, file may be truncated. No random access support. </li>
+            </ul>
+
+            <h4 id="indexed-allocation">Indexed Allocation</h4>
+            <ul>
+                <li><strong>Mechanism:</strong> Uses index tables (efficient and supports large files). </li>
+                <li><strong>Pros:</strong> Efficient, supports large files. Supports both sequential and direct access. No external fragmentation. Handles large files efficiently. </li>
+                <li><strong>Cons:</strong> Overhead of maintaining an index. Requires extra space for index blocks. Complex for very large files needing multi-level indexing. Loss of index block makes file inaccessible. </li>
+            </ul>
+
+            <h3 id="comparison-of-file-allocation-methods">Comparison of File Allocation Methods</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Advantages</th>
+                        <th>Disadvantages</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Contiguous Allocation</td>
+                        <td>- Simple and fast access (both sequential and direct). <br> - Best performance for sequential access. <br> - Easy to calculate physical addresses.</td>
+                        <td>- External fragmentation can waste space. <br> - Requires pre-allocation of file size. <br> - Compaction may be needed to free up space.</td>
+                    </tr>
+                    <tr>
+                        <td>Linked Allocation</td>
+                        <td>- No external fragmentation. <br> - File size can grow dynamically. <br> - Good for sequential access.</td>
+                        <td>- Internal fragmentation in the last block. <br> - Pointer overhead in each block. <br> - If a pointer is lost, file may be truncated. <br> - No random access support.</td>
+                    </tr>
+                    <tr>
+                        <td>Indexed Allocation</td>
+                        <td>- Supports both sequential and direct access. <br> - No external fragmentation. <br> - Handles large files efficiently.</td>
+                        <td>- Requires extra space for index blocks. <br> - Complex for very large files needing multi-level indexing. <br> - Loss of index block makes file inaccessible.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <span class="citation"></span>
+
+            <h3 id="file-system-types">File System Types</h3>
+            <p>File system examples: </p>
+            <ul>
+                <li><strong>FAT (File Allocation Table):</strong> 
+                    <ul>
+                        <li>Used in: MS-DOS, Windows. </li>
+                        <li>Allocation Method: Linked Allocation. </li>
+                        <li>Notes: Maintains a FAT table as a linked list.  Simple but inefficient for large disks.  Variants: FAT-16, FAT-32, exFAT. </li>
+                    </ul>
+                </li>
+                <li><strong>NTFS (New Technology File System):</strong> 
+                    <ul>
+                        <li>Used in: Modern Windows OS. </li>
+                        <li>Allocation Method: Indexed Allocation (with Extents). </li>
+                        <li>Notes: Uses the Master File Table (MFT) to manage files and metadata.  Supports security, journaling, compression, encryption.  Efficient for large volumes. </li>
+                    </ul>
+                </li>
+                <li><strong>ext (Extended File System):</strong> 
+                    <ul>
+                        <li>Used in: Linux (ext2, ext3, ext4). </li>
+                        <li>Allocation Method: Indexed Allocation with i-nodes. </li>
+                        <li>Notes: Uses i-nodes to store file metadata and block pointers.  ext4 supports journaling and multi-level indexing.  Reduces fragmentation and improves performance. </li>
+                    </ul>
+                </li>
+                <li><strong>ISO9660:</strong> 
+                    <ul>
+                        <li>Used in: CD-ROMs and optical media. </li>
+                        <li>Allocation Method: Contiguous Allocation. </li>
+                        <li>Notes: Optimized for sequential access.  All file blocks are placed contiguously. </li>
+                    </ul>
+                </li>
+            </ul>
+            <p>A summary table comparing these file systems with their allocation methods and notes is also provided. </p>
+
+            <h3 id="directory-structure">Directory Structure</h3>
+            <p>Files are organized in directories.  A directory is a special file that contains references to other files. </p>
+            <ul>
+                <li>Acts as a symbol table, mapping file names to file metadata (e.g., FCBs or inodes). </li>
+                <li>Organizes files in a logical hierarchy, making file management easier. </li>
+                <li>Enables the OS to quickly locate and manage files. </li>
+            </ul>
+
+            <h3 id="directory-operations">Directory Operations</h3>
+            <p>Directories support the following operations: </p>
+            <ol>
+                <li><strong>Search:</strong> Find a file by name. </li>
+                <li><strong>Create:</strong> Add a new file entry. </li>
+                <li><strong>Delete:</strong> Remove a file entry. </li>
+                <li><strong>List:</strong> Display all files in a directory. </li>
+                <li><strong>Rename:</strong> Change a file name. </li>
+                <li><strong>Traverse:</strong> Navigate through file paths (e.g., <code>/home/user/docs</code>). </li>
+            </ol>
+            <p>*Note: Create, Delete, and Rename modify the directory itself. </p>
+
+            <h3 id="directory-organization">Directory Organization</h3>
+            <ul>
+                <li><strong>Single-Level:</strong> All files in one folder (simple, but messy). </li>
+                <li><strong>Two-Level:</strong> One folder per user. </li>
+                <li><strong>Hierarchical (Tree):</strong> Folder within folder (most common). </li>
+                <li><strong>DAG (Graph):</strong> Advanced, supports file sharing using links. </li>
+            </ul>
+
+            <h3 id="efficiency-and-performance">Efficiency and Performance</h3>
+            <p>File System (FS) efficiency is critical for system performance because files are the main tool for data storage and disks are the slowest storage. </p>
+            <p>FS efficiency depends on: </p>
+            <ul>
+                <li>Disk allocation method and directory algorithms. </li>
+                <li>Types of data kept in file's directory entry (e.g., whether listing size requires a separate stat() call per entry). </li>
+                <li>Pre-allocation or as-needed allocation of metadata structures (e.g., UNIX i-nodes are pre-allocated, costing nothing to create). </li>
+                <li>Fixed-size or varying-size data structures. </li>
+            </ul>
+
+            <h3 id="recovery-in-file-systems">Recovery in File Systems</h3>
+            <h4 id="consistency-crash-handling">Consistency & Crash Handling</h4>
+            <p>FS implementation keeps the same data in multiple places (e.g., on-disk, in-memory, in caches).  FS operations must update multiple related structures (e.g., allocate an inode, assign data blocks, update metadata).  What if a crash or corruption breaks FS consistency?  The FS may be left in an inconsistent state. </p>
+            <p>Recovery involves two main steps: </p>
+            <ol>
+                <li>Detect inconsistencies. </li>
+                <li>Correct (if possible). </li>
+            </ol>
+
+            <h4 id="checking-backup">Checking & Backup</h4>
+            <ul>
+                <li><strong>Consistency Checking:</strong>
+                    <ul>
+                        <li>Compares directory structure with actual data blocks on disk. </li>
+                        <li>Tool example: <code>fsck</code> on UNIX systems. </li>
+                        <li>Can be slow and not always foolproof. </li>
+                        <li>Often run during system boot (especially after unclean shutdowns). </li>
+                    </ul>
+                </li>
+                <li><strong>Backups and Restoration:</strong>
+                    <ul>
+                        <li>Use tools to backup FS data to magnetic tape, secondary disk, etc. </li>
+                        <li>Lost data can be recovered by restoring from backup. </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4 id="journaling-in-file-systems">Journaling in File Systems</h4>
+            <p><strong>What is Journaling?</strong> A journaling file system maintains a log of changes before applying them.  It is inspired by database log-based recovery algorithms.  Its goal is to prevent file system inconsistencies by ensuring tracked, recoverable updates. </p>
+            <p><strong>Key Concepts:</strong> </p>
+            <ul>
+                <li>Metadata updates are treated as transactions. </li>
+                <li>Transactions are written to a log before updating file system structures. </li>
+                <li>The log can reside on a separate section of the disk or device. </li>
+            </ul>
+            <p><strong>Transaction Commit Process:</strong> </p>
+            <ul>
+                <li>A transaction is considered committed once it's safely written to the log. </li>
+                <li>File system structures are updated asynchronously (flush). </li>
+                <li>After updating, the transaction is removed from the log. </li>
+            </ul>
+            <p><strong>Crash Recovery:</strong> </p>
+            <ul>
+                <li>Unfinished transactions in the log are replayed during the next mount. </li>
+                <li>This ensures fast recovery and consistent metadata. </li>
+            </ul>
+            <p><strong>Performance Benefits:</strong> </p>
+            <ul>
+                <li>Transactions can be batched together. </li>
+                <li>Batching improves write performance and reduces disk operations. </li>
+            </ul>
+            <p><strong>Common Examples of Journaling File Systems:</strong> </p>
+            <ul>
+                <li>NTFS (used in Windows) </li>
+                <li>ext3 (Linux, supports journaling) </li>
+                <li>ext4 (Linux, enhanced performance and journaling) </li>
+                <li>XFS (high-performance journaling FS used in Linux) </li>
+                <li>Btrfs (modern Linux FS with advanced journaling and snapshot support) </li>
+            </ul>
+
+            <h3 id="modern-file-system-extensions">Modern File System Extensions</h3>
+            <p>Modern file systems go beyond ext4, NTFS, and FAT.  They address unique hardware needs (e.g., SSDs)  and enable OS-level abstraction for file system diversity. </p>
+
+            <h4 id="flash-based-file-systems">Flash-based File Systems</h4>
+            <ul>
+                <li>SSDs use NAND flash memory instead of magnetic disks. </li>
+                <li><strong>Key Differences:</strong>
+                    <ul>
+                        <li>No moving parts → faster and more durable. </li>
+                        <li>Asymmetric performance → writes are slower than reads. </li>
+                        <li>Needs wear leveling → distributes writes to prolong life. </li>
+                    </ul>
+                </li>
+                <li><strong>Examples:</strong> 
+                    <ul>
+                        <li>F2FS - Flash-Friendly File System (by Samsung) </li>
+                        <li>JFFS2, YAFFS - used in embedded devices </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4 id="virtual-file-systems-vfs">Virtual File Systems (VFS)</h4>
+            <ul>
+                <li>VFS is an abstraction layer built into the operating system. </li>
+                <li><strong>Purpose:</strong>
+                    <ul>
+                        <li>Provides a common interface across different file system types. </li>
+                        <li>Enables multiple file systems to coexist on one OS. </li>
+                    </ul>
+                </li>
+                <li><strong>How It Works:</strong> 
+                    <ul>
+                        <li>Translates OS-level calls (open, read, write) to specific FS operations. </li>
+                        <li>Supports ext4, FAT, NTFS, ReiserFS and more via the same APIs. </li>
+                    </ul>
+                </li>
+                <li><strong>Example:</strong> Linux VFS enables transparent support for multiple formats. </li>
+            </ul>
+            <p><strong>Summary of File Management:</strong> A file is a named collection of data on secondary storage. File systems manage storage efficiently. The OS supports file operations, attributes, and allocation methods. Journaling and recovery prevent data loss. </p>
+
+            <h4>Exam Ready Questions: File Management</h4>
+            <div class="exam-question">
+                <p><strong>Question 1:</strong> An index block can store up to 12 pointers, each pointing to a 1KB data block. A file of size 20KB is stored using indexed allocation. 
+                <br>A. How many index blocks are required to store this file? 
+                <br>B. If the index block is damaged, what recovery techniques could help retrieve the file? </p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    <br>A. <strong>Calculate required index blocks:</strong>
+                    <ul>
+                        <li>File size = 20 KB</li>
+                        <li>Size of each data block = 1 KB</li>
+                        <li>Number of data blocks needed = 20 KB / 1 KB = 20 blocks</li>
+                        <li>Pointers per index block = 12</li>
+                        <li>Index blocks required = Ceiling(Number of data blocks / Pointers per index block) = Ceiling(20 / 12) = Ceiling(1.66) = 2 index blocks.</li>
+                    </ul>
+                    So, 2 index blocks are required.
+                    <br>B. <strong>Recovery techniques if an index block is damaged:</strong>
+                    If an index block is damaged, it would lead to the inaccessibility of the file or parts of it, as the index block contains the pointers to the data blocks.  Recovery techniques could include:
+                    <ul>
+                        <li><strong>Consistency Checking:</strong> Tools like `fsck` (on UNIX systems) can be run to compare the directory structure with the actual data blocks on disk and detect inconsistencies. While it might not fully recover the data if the index block is unreadable, it can identify the corrupted state. </li>
+                        <li><strong>Backups and Restoration:</strong> This is the most reliable method. If regular backups of the file system (including metadata like index blocks) are maintained, the lost data can be recovered by restoring from the most recent backup. </li>
+                        <li><strong>Journaling File Systems:</strong> Modern file systems with journaling (like NTFS, ext3/ext4) maintain a log of changes before applying them to the main file system structures. In case of a crash or corruption, unfinished transactions in the log can be replayed during the next mount, ensuring fast recovery and consistent metadata. This might help recover recent changes to the index block, but a completely corrupted block would still need a backup. </li>
+                    </ul></p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 2:</strong> Describe "Journaling" in file systems, explaining its purpose and key concepts. How does it contribute to file system recovery?</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    Journaling in file systems is a technique where the file system maintains a log of all changes it intends to make before actually applying those changes to the main file system structures on disk. 
+                    Its primary purpose is to prevent file system inconsistencies, especially after system crashes or power failures, by ensuring that updates are tracked and recoverable. 
+                    Key concepts include:
+                    <ul>
+                        <li>Metadata updates (like changes to directory structures or file attributes) are treated as transactions. </li>
+                        <li>These transactions are first written to a dedicated log (the "journal"), often located on a separate part of the disk, before they are committed to the actual file system. </li>
+                    </ul>
+                    In terms of recovery, if a system crashes before a transaction is fully written to the main file system but after it's logged in the journal, the file system can replay the unfinished transactions from the log during the next system mount.  This ensures that the file system returns to a consistent state, preventing data corruption and speeding up recovery compared to traditional consistency checks (like `fsck`). </p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 3:</strong> You are designing a system that frequently handles large video files that are read sequentially and are rarely edited. Would contiguous allocation be a good fit for storing these files? Justify your answer with technical reasoning, considering its advantages and disadvantages.</p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    Yes, contiguous allocation would be a good fit for storing large video files that are read sequentially and rarely edited. 
+                    <br><strong>Justification:</strong>
+                    <ul>
+                        <li><strong>Advantages of Contiguous Allocation:</strong>
+                            <ul>
+                                <li><strong>Fast Sequential Access:</strong> Contiguous allocation stores files in continuous blocks on the disk. This allows for very fast sequential reading because the disk head can move smoothly from one block to the next without needing to seek to different locations. This is ideal for streaming large video files. </li>
+                                <li><strong>Simplicity:</strong> It is a simple allocation method, making it straightforward to implement and manage. </li>
+                                <li><strong>Easy Physical Address Calculation:</strong> Given the starting block and file size, calculating the physical address of any part of the file is very easy. </li>
+                            </ul>
+                        </li>
+                        <li><strong>Addressing Disadvantages:</strong>
+                            <ul>
+                                <li><strong>External Fragmentation and Resizing:</strong> While contiguous allocation suffers from external fragmentation and has issues with file resizing, these are less critical for files that are "rarely edited" and whose "large" size is likely known at creation. Video files typically don't grow or shrink frequently once created.  While compaction might be needed occasionally, the benefits for sequential access outweigh this drawback for such use cases. </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    Therefore, for a system prioritizing efficient sequential reads of large, static files, contiguous allocation offers significant performance benefits that align well with the described workload.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="security-in-operating-systems">
+            <h2>Security in Operating Systems</h2>
+
+            <h3 id="introduction-to-os-security">Introduction to OS Security</h3>
+            <p>OS security protects data and system resources from unauthorized access.  It involves technical, administrative, and legal measures.  Security mechanisms enforce access control and prevent attacks. </p>
+
+            <h3 id="cia-security-triad">CIA Security Triad</h3>
+            <ul>
+                <li><strong>Confidentiality:</strong> Ensures data is accessed only by authorized users. </li>
+                <li><strong>Integrity:</strong> Protects data from being altered by unauthorized entities. </li>
+                <li><strong>Availability:</strong> Ensures that resources are accessible when needed. </li>
+            </ul>
+
+            <h3 id="security-principles">Security Principles</h3>
+            <ul>
+                <li><strong>Least Privilege:</strong> Users/processes should have the minimum necessary permissions. </li>
+                <li><strong>Defense in Depth:</strong> Multiple layers of security mechanisms. </li>
+                <li><strong>Fail-Safe Defaults:</strong> Deny access by default, grant only when necessary. </li>
+            </ul>
+
+            <h3 id="trusted-computing-base-tcb">Trusted Computing Base (TCB)</h3>
+            <ul>
+                <li>The TCB includes all hardware, software, and firmware critical to security. </li>
+                <li>Smaller TCB reduces attack surface. </li>
+                <li>Examples: Secure Boot, TPM, and hypervisors. </li>
+            </ul>
+
+            <h3 id="types-of-attackers-threats">Types of Attackers & Threats</h3>
+            <ul>
+                <li><strong>Attackers:</strong> Hackers, crackers, cybercriminals, and nation-state actors. </li>
+                <li><strong>Common Threats:</strong> Malware, phishing, ransomware, denial-of-service attacks. </li>
+                <li><strong>Insider Threats:</strong> Employees exploiting access to compromise security. </li>
+            </ul>
+
+            <h3 id="access-control-mechanisms">Access Control Mechanisms</h3>
+            <ul>
+                <li><strong>Access Control Lists (ACLs):</strong> Lists permissions for each user/group. </li>
+                <li><strong>Capabilities:</strong> Tokens assigned to processes specifying access rights. </li>
+                <li><strong>Role-Based Access Control (RBAC):</strong> Enhances security in organizations. </li>
+            </ul>
+
+            <h3 id="formal-models-of-secure-systems">Formal Models of Secure Systems</h3>
+            <ul>
+                <li><strong>Bell-LaPadula Model:</strong> Prevents information leakage in multilevel security. </li>
+                <li><strong>Biba Model:</strong> Ensures data integrity by preventing lower-privilege writes. </li>
+                <li><strong>Trusted Platform Modules (TPM):</strong> Support hardware-based security. </li>
+            </ul>
+
+            <h3 id="authentication-techniques">Authentication Techniques</h3>
+            <ul>
+                <li><strong>Something You Know:</strong> Passwords, PINs. </li>
+                <li><strong>Something You Have:</strong> Smart cards, security tokens. </li>
+                <li><strong>Something You Are:</strong> Biometrics (fingerprint, retina scan). </li>
+            </ul>
+
+            <h3 id="software-exploits">Software Exploits</h3>
+            <ul>
+                <li><strong>Buffer Overflow:</strong> Overwriting memory to execute malicious code. </li>
+                <li><strong>Injection Attacks:</strong> SQL, Command Injection, XSS. </li>
+                <li><strong>Use-After-Free:</strong> Exploiting dangling pointers to execute arbitrary code. </li>
+            </ul>
+
+            <h3 id="hardware-exploits">Hardware Exploits</h3>
+            <ul>
+                <li><strong>Side-Channel Attacks:</strong> Extracting information from power usage, timing. </li>
+                <li><strong>Speculative Execution Attacks:</strong> Meltdown and Spectre vulnerabilities. </li>
+                <li><strong>Covert Channels:</strong> Hiding communication paths in system behavior. </li>
+            </ul>
+
+            <h3 id="insider-threats">Insider Threats</h3>
+            <ul>
+                <li><strong>Logic Bombs:</strong> Malicious code triggered under specific conditions. </li>
+                <li><strong>Backdoors:</strong> Secret access points left by developers or attackers. </li>
+                <li><strong>Social Engineering:</strong> Tricking users into revealing credentials. </li>
+            </ul>
+
+            <h3 id="operating-system-hardening">Operating System Hardening</h3>
+            <ul>
+                <li><strong>Fine-grained Randomization:</strong> Random memory layout to prevent exploits. </li>
+                <li><strong>Control-Flow Integrity:</strong> Ensuring program execution follows expected paths. </li>
+                <li><strong>Mandatory Access Control (MAC):</strong> Stronger security policies over DAC. </li>
+            </ul>
+
+            <h3 id="security-in-modern-os">Security in Modern OS</h3>
+            <ul>
+                <li><strong>Linux:</strong> SELinux for enforcing access control policies. </li>
+                <li><strong>Windows:</strong> User Account Control (UAC) and Secure Boot. </li>
+                <li><strong>Android:</strong> Sandboxing applications and permission models. </li>
+            </ul>
+
+            <h4>Exam Ready Questions: Security in Operating Systems</h4>
+            <div class="exam-question">
+                <p><strong>Question 1:</strong> List and briefly explain the three core components of the CIA Security Triad. </p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    The CIA Security Triad consists of:
+                    <ol>
+                        <li><strong>Confidentiality:</strong> Ensures that data is accessed and viewed only by authorized users. It aims to prevent unauthorized disclosure of information. </li>
+                        <li><strong>Integrity:</strong> Guarantees that data remains accurate, complete, and trustworthy throughout its lifecycle. It protects data from being altered or destroyed by unauthorized entities. </li>
+                        <li><strong>Availability:</strong> Ensures that authorized users can access resources and information when needed. It aims to prevent disruptions to access or service. </li>
+                    </ol></p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 2:</strong> What is the purpose of a "Trusted Computing Base (TCB)" in operating system security, and why is a smaller TCB considered beneficial? </p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    The Trusted Computing Base (TCB) refers to all the hardware, software, and firmware components within a system that are critical to maintaining its security.  If any part of the TCB is compromised, the entire system's security can be jeopardized.
+                    A smaller TCB is considered beneficial because it reduces the "attack surface" of the system.  With fewer components and less code in the TCB, there are fewer potential vulnerabilities for attackers to exploit, making the system inherently more secure and easier to audit. </p>
+                </div>
+            </div>
+            <div class="exam-question">
+                <p><strong>Question 3:</strong> Provide two examples of "Hardware Exploits" and briefly describe what each aims to achieve. </p>
+                <button class="toggle-answer-btn">Show Answer</button>
+                <div class="exam-answer">
+                    <p><strong>Answer:</strong>
+                    Two examples of Hardware Exploits are:
+                    <ol>
+                        <li><strong>Side-Channel Attacks:</strong> These attacks aim to extract sensitive information from a system by observing its physical implementation, rather than directly attacking its cryptographic algorithms or software vulnerabilities. Examples include analyzing power consumption patterns, electromagnetic emissions, or timing variations during operations (e.g., encryption) to deduce secret keys or other data. </li>
+                        <li><strong>Speculative Execution Attacks (e.g., Meltdown and Spectre):</strong> These exploits leverage vulnerabilities in modern CPU architectures that use speculative execution to improve performance. They allow malicious programs to potentially read data from protected memory locations that they should not normally be able to access, by exploiting the CPU's prediction mechanisms and caching side effects. </li>
+                        <li><strong>Covert Channels:</strong> These are communication paths that are hidden or not intended for data transfer. They allow two processes to transfer information in a way that violates a system's security policy. This is achieved by manipulating shared resources in a way that can be observed by the receiving process, thereby creating a hidden communication line within legitimate system behavior. </li>
+                    </ol></p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Operating Systems Module Notes | Developed by Randun Gayantha</p>
+        <p>&copy; 2025 All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation
+            document.querySelectorAll('nav ul li a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    // Check if the href starts with '#' (i.e., it's an internal anchor link)
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault(); // Only prevent default for internal links
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                    // For links not starting with '#', the default behavior (redirection) will occur
+                });
+            });
+
+            // Toggle answers for exam questions
+            document.querySelectorAll('.toggle-answer-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const answerDiv = this.nextElementSibling;
+                    if (answerDiv.classList.contains('show')) {
+                        answerDiv.classList.remove('show');
+                        this.textContent = 'Show Answer';
+                    } else {
+                        answerDiv.classList.add('show');
+                        this.textContent = 'Hide Answer';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

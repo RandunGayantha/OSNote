@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type='text/javascript' src='//racesmoulderstamp.com/80/93/ba/8093baf87056ee75c4d23544972b53ee.js'></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OS Study Hub | Randun Gayantha</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #3aa8e0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .main-content {
+            padding: 3rem 0;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        .section h3 {
+            color: var(--secondary);
+            margin-top: 1.5rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .qa-item {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .qa-item h4 {
+            margin-top: 0;
+            color: var(--secondary);
+        }
+        
+        .qa-item .answer {
+            background-color: white;
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">OS Study Hub</a>
+                
+            </nav>
+            
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <div class="container">
+            <section id="introduction" class="section">
+                <h2>Introduction to Operating Systems</h2>
+                
+                <h3>What is an Operating System?</h3>
+                <p>An OS is a software layer that acts as a bridge between computer hardware and user programs. It manages resources and provides services for applications.</p>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3>OS Functions</h3>
+                        <ul>
+                            <li>Resource Manager: Allocates CPU, memory, I/O devices</li>
+                            <li>Extended Machine: Provides easy-to-use interface</li>
+                            <li>Controls program execution</li>
+                            <li>Acts as intermediary between users and hardware</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>OS Objectives</h3>
+                        <ul>
+                            <li>Convenience: Makes computer easier to use</li>
+                            <li>Efficiency: Maximizes resource utilization</li>
+                            <li>Extensibility: Allows adding new features</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>OS Evolution</h3>
+                        <ol>
+                            <li>1st Gen (1945-55): Vacuum tubes, no OS</li>
+                            <li>2nd Gen (1955-65): Transistors, batch systems</li>
+                            <li>3rd Gen (1965-80): ICs, multiprogramming</li>
+                            <li>4th Gen (1980-): Personal computers</li>
+                            <li>5th Gen (1990-): Mobile computing</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <h3>Operating System Zoo</h3>
+                <p>Different types of OS for different purposes:</p>
+                <ul>
+                    <li><strong>Mainframe OS:</strong> For large-scale processing</li>
+                    <li><strong>Server OS:</strong> Multi-user environments</li>
+                    <li><strong>PC OS:</strong> Windows, macOS for personal use</li>
+                    <li><strong>Smartphone OS:</strong> Android, iOS for mobile</li>
+                    <li><strong>Real-Time OS:</strong> For time-critical systems</li>
+                    <li><strong>Embedded OS:</strong> For small devices like smartwatches</li>
+                </ul>
+            </section>
+            
+            <section id="processes" class="section">
+                <h2>Processes and Threads</h2>
+                
+                <h3>Process vs Program</h3>
+                <table style="width:100%; border-collapse: collapse;">
+                    <tr style="background-color: var(--primary); color: white;">
+                        <th style="padding: 10px; text-align: left;">Program</th>
+                        <th style="padding: 10px; text-align: left;">Process</th>
+                    </tr>
+                    <tr style="background-color: #f8f9fa;">
+                        <td style="padding: 10px; border: 1px solid #ddd;">Passive set of instructions</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Active program in execution</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Stored on disk</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Loaded in memory</td>
+                    </tr>
+                    <tr style="background-color: #f8f9fa;">
+                        <td style="padding: 10px; border: 1px solid #ddd;">Long life span</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">Limited life span</td>
+                    </tr>
+                </table>
+                
+                <h3>Process Memory Layout</h3>
+                <div style="background-color: #f5f7fa; padding: 1rem; border-radius: 4px;">
+                    <p style="text-align: center; margin: 0; font-weight: bold;">High Memory</p>
+                    <p style="margin: 0.5rem 0 0 2rem;">Stack (function calls, local variables)</p>
+                    <p style="margin: 0.5rem 0 0 2rem;">Heap (dynamic memory allocation)</p>
+                    <p style="margin: 0.5rem 0 0 2rem;">Data (global & static variables)</p>
+                    <p style="margin: 0.5rem 0 0 2rem;">Text (executable code)</p>
+                    <p style="text-align: center; margin: 0; font-weight: bold;">Low Memory</p>
+                </div>
+                
+                <h3>Process States</h3>
+                <div style="text-align: center; margin: 1rem 0;">
+                    <p>New → Ready → Running → Waiting → Terminated</p>
+                    <p>Processes transition between these states based on scheduling and events</p>
+                </div>
+                
+                <h3>Threads</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>User-Level Threads</h4>
+                        <ul>
+                            <li>Managed by user libraries</li>
+                            <li>Fast and portable</li>
+                            <li>Blocking affects entire process</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Kernel-Level Threads</h4>
+                        <ul>
+                            <li>Managed by OS kernel</li>
+                            <li>Independent scheduling</li>
+                            <li>Higher overhead</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Hybrid Threads</h4>
+                        <ul>
+                            <li>Combines both approaches</li>
+                            <li>Flexible and efficient</li>
+                            <li>Example: Thread libraries</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="scheduling" class="section">
+                <h2>Process Scheduling</h2>
+                
+                <h3>Scheduling Types</h3>
+                <ul>
+                    <li><strong>Long-Term:</strong> Decides which jobs to admit</li>
+                    <li><strong>Medium-Term:</strong> Manages memory by suspending/resuming processes</li>
+                    <li><strong>Short-Term:</strong> Allocates CPU to ready processes</li>
+                </ul>
+                
+                <h3>Scheduling Algorithms</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>First-Come-First-Served (FCFS)</h4>
+                        <ul>
+                            <li>Simple, executes in arrival order</li>
+                            <li>Convoy effect - long jobs delay short ones</li>
+                            <li>Non-preemptive</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Shortest Job First (SJF)</h4>
+                        <ul>
+                            <li>Chooses shortest CPU burst first</li>
+                            <li>Optimal for minimizing waiting time</li>
+                            <li>Requires knowing burst times in advance</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Priority Scheduling</h4>
+                        <ul>
+                            <li>Executes based on priority levels</li>
+                            <li>May cause starvation of low-priority jobs</li>
+                            <li>Aging can prevent starvation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Round Robin (RR)</h4>
+                        <ul>
+                            <li>Each process gets fixed time quantum</li>
+                            <li>Balances responsiveness and overhead</li>
+                            <li>Time quantum size affects performance</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Real-Time Scheduling</h4>
+                        <ul>
+                            <li>Rate Monotonic: Shorter period = higher priority</li>
+                            <li>Earliest Deadline First: Prioritizes nearest deadlines</li>
+                            <li>Used in time-critical systems</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="memory" class="section">
+                <h2>Memory Management</h2>
+                
+                <h3>Memory Hierarchy</h3>
+                <div style="background-color: #f5f7fa; padding: 1rem; border-radius: 4px;">
+                    <p style="margin: 0.5rem 0 0 2rem;">Registers (fastest, smallest)</p>
+                    <p style="margin: 0.5rem 0 0 2rem;">Cache (small, fast)</p>
+                    <p style="margin: 0.5rem 0 0 2rem;">Main Memory (RAM)</p>
+                    <p style="margin: 0.5rem 0 0 2rem;">Secondary Storage (HDD/SSD)</p>
+                </div>
+                
+                <h3>Memory Allocation Techniques</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>Fixed Partitioning</h4>
+                        <ul>
+                            <li>Memory divided into fixed-size partitions</li>
+                            <li>Simple but causes internal fragmentation</li>
+                            <li>Degree of multiprogramming limited by partitions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Variable Partitioning</h4>
+                        <ul>
+                            <li>Memory allocated based on process needs</li>
+                            <li>No internal fragmentation</li>
+                            <li>Causes external fragmentation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Paging</h4>
+                        <ul>
+                            <li>Divides memory into fixed-size frames</li>
+                            <li>Uses page tables for address translation</li>
+                            <li>Eliminates external fragmentation</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>Virtual Memory</h3>
+                <p>Extends RAM by using disk space, allowing programs to run even if not entirely in memory.</p>
+                
+                <h4>Page Replacement Algorithms</h4>
+                <ul>
+                    <li><strong>FIFO:</strong> Replaces oldest page (may suffer Belady's anomaly)</li>
+                    <li><strong>Optimal:</strong> Replaces page not used for longest time (requires future knowledge)</li>
+                    <li><strong>LRU:</strong> Replaces least recently used page</li>
+                    <li><strong>Clock:</strong> Gives pages a second chance before replacement</li>
+                </ul>
+                
+                <h3>Thrashing</h3>
+                <p>Occurs when excessive page swapping reduces CPU utilization. Can be avoided using:</p>
+                <ul>
+                    <li>Working Set Model</li>
+                    <li>Page Fault Frequency algorithm</li>
+                    <li>Proper memory allocation</li>
+                </ul>
+            </section>
+            
+            <section id="files" class="section">
+                <h2>File Systems</h2>
+                
+                <h3>File Attributes</h3>
+                <ul>
+                    <li>Name, Identifier, Type</li>
+                    <li>Location, Size, Protection</li>
+                    <li>Timestamps (created, modified, accessed)</li>
+                    <li>Stored in File Control Block (FCB)</li>
+                </ul>
+                
+                <h3>File Operations</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>Basic Operations</h4>
+                        <ul>
+                            <li>Create, Read, Write</li>
+                            <li>Seek, Delete, Truncate</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Advanced Operations</h4>
+                        <ul>
+                            <li>Lock/Unlock</li>
+                            <li>Memory Mapping</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>File Allocation Methods</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>Contiguous</h4>
+                        <ul>
+                            <li>Files stored in continuous blocks</li>
+                            <li>Fast but causes external fragmentation</li>
+                            <li>Used in ISO9660 (CD-ROMs)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Linked</h4>
+                        <ul>
+                            <li>Files stored in linked blocks</li>
+                            <li>No fragmentation but slow access</li>
+                            <li>Used in FAT file system</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Indexed</h4>
+                        <ul>
+                            <li>Uses index tables for file blocks</li>
+                            <li>Efficient for large files</li>
+                            <li>Used in NTFS, ext4</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>Directory Structures</h3>
+                <ul>
+                    <li><strong>Single-Level:</strong> All files in one folder</li>
+                    <li><strong>Two-Level:</strong> One folder per user</li>
+                    <li><strong>Hierarchical:</strong> Tree structure (most common)</li>
+                    <li><strong>DAG:</strong> Directed Acyclic Graph (supports links)</li>
+                </ul>
+                
+                <h3>File System Types</h3>
+                <ul>
+                    <li><strong>FAT:</strong> Simple, uses linked allocation</li>
+                    <li><strong>NTFS:</strong> Advanced, uses indexed allocation with extents</li>
+                    <li><strong>ext4:</strong> Linux, uses inodes for metadata</li>
+                </ul>
+            </section>
+            
+            <section id="security" class="section">
+                <h2>OS Security</h2>
+                
+                <h3>CIA Triad</h3>
+                <div class="grid">
+                    <div class="card" style="background-color: #e8f5e9;">
+                        <h4>Confidentiality</h4>
+                        <p>Ensures data is accessed only by authorized users</p>
+                    </div>
+                    
+                    <div class="card" style="background-color: #fff8e1;">
+                        <h4>Integrity</h4>
+                        <p>Protects data from unauthorized alteration</p>
+                    </div>
+                    
+                    <div class="card" style="background-color: #f3e5f5;">
+                        <h4>Availability</h4>
+                        <p>Ensures resources are accessible when needed</p>
+                    </div>
+                </div>
+                
+                <h3>Security Principles</h3>
+                <ul>
+                    <li><strong>Least Privilege:</strong> Minimum necessary permissions</li>
+                    <li><strong>Defense in Depth:</strong> Multiple security layers</li>
+                    <li><strong>Fail-Safe Defaults:</strong> Deny access by default</li>
+                </ul>
+                
+                <h3>Security Mechanisms</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>Authentication</h4>
+                        <ul>
+                            <li>Something you know (passwords)</li>
+                            <li>Something you have (smart cards)</li>
+                            <li>Something you are (biometrics)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Access Control</h4>
+                        <ul>
+                            <li>ACLs (Access Control Lists)</li>
+                            <li>RBAC (Role-Based Access Control)</li>
+                            <li>MAC (Mandatory Access Control)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Security Models</h4>
+                        <ul>
+                            <li>Bell-LaPadula (confidentiality)</li>
+                            <li>Biba (integrity)</li>
+                            <li>Trusted Platform Modules (hardware security)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>Common Threats</h3>
+                <ul>
+                    <li>Malware, phishing, ransomware</li>
+                    <li>Buffer overflow, injection attacks</li>
+                    <li>Side-channel attacks (Meltdown, Spectre)</li>
+                    <li>Insider threats (logic bombs, backdoors)</li>
+                </ul>
+            </section>
+            
+            <section id="qa" class="section">
+                <h2>Exam-Ready Questions & Answers</h2>
+                
+                <div class="qa-item">
+                    <h4>Q: What is the difference between a program and a process?</h4>
+                    <div class="answer">
+                        <p>A: A program is a passive set of instructions stored on disk, while a process is an active instance of a program loaded in memory with its own resources and state.</p>
+                    </div>
+                </div>
+                
+                <div class="qa-item">
+                    <h4>Q: Explain the concept of virtual memory.</h4>
+                    <div class="answer">
+                        <p>A: Virtual memory is a technique that uses disk space to extend RAM, allowing programs to run even when not entirely loaded in physical memory. It provides each process with its own address space and uses paging to map virtual addresses to physical ones.</p>
+                    </div>
+                </div>
+                
+                <div class="qa-item">
+                    <h4>Q: Compare FCFS and SJF scheduling algorithms.</h4>
+                    <div class="answer">
+                        <p>A: FCFS (First-Come-First-Served) executes processes in arrival order, which is simple but can lead to long waiting times for short jobs behind long ones. SJF (Shortest Job First) prioritizes processes with the shortest CPU burst, minimizing average waiting time but requires knowing burst times in advance.</p>
+                    </div>
+                </div>
+                
+                <div class="qa-item">
+                    <h4>Q: What are the three main file allocation methods?</h4>
+                    <div class="answer">
+                        <p>A: The three main methods are:
+                        <ol>
+                            <li>Contiguous - files stored in continuous blocks (fast but causes fragmentation)</li>
+                            <li>Linked - files stored in non-contiguous blocks linked by pointers (flexible but slow access)</li>
+                            <li>Indexed - uses index tables to locate file blocks (efficient for large files)</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="qa-item">
+                    <h4>Q: What is thrashing and how can it be prevented?</h4>
+                    <div class="answer">
+                        <p>A: Thrashing occurs when excessive page swapping reduces CPU utilization. It happens when processes don't have enough memory frames. Prevention methods include:
+                        <ul>
+                            <li>Using the Working Set Model to allocate enough frames</li>
+                            <li>Implementing Page Fault Frequency algorithm</li>
+                            <li>Proper memory allocation policies</li>
+                            <li>Increasing physical memory or reducing system load</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="qa-item">
+                    <h4>Q: Explain the difference between internal and external fragmentation.</h4>
+                    <div class="answer">
+                        <p>A: Internal fragmentation occurs when allocated memory blocks are larger than needed, wasting space within the allocation (common in fixed partitioning). External fragmentation happens when free memory is broken into small, non-contiguous pieces that can't be used for new allocations (common in variable partitioning).</p>
+                    </div>
+                </div>
+                
+                <div class="qa-item">
+                    <h4>Q: What are the components of the CIA triad in security?</h4>
+                    <div class="answer">
+                        <p>A: The CIA triad consists of:
+                        <ul>
+                            <li>Confidentiality - ensuring data is only accessible to authorized users</li>
+                            <li>Integrity - protecting data from unauthorized modification</li>
+                            <li>Availability - ensuring systems and data are accessible when needed</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="qa-item">
+                    <h4>Q: Compare user-level and kernel-level threads.</h4>
+                    <div class="answer">
+                        <p>A: User-level threads are managed by user libraries without kernel involvement, making them fast and portable, but blocking one thread blocks the entire process. Kernel-level threads are managed by the OS, allowing independent scheduling and better concurrency, but with higher overhead due to system calls.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 Operating Systems Study Hub | Developed by Randun Gayantha</p>
+            <p>Based on lecture materials from NSBM Green University</p>
+        </div>
+    </footer>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <script>
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
